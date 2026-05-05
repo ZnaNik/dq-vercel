@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DQ Design Challenge — Senior [v2]</title>
+<title>DQ Interview — Senior Data Quality Engineer</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#fff;color:#172b4d;line-height:1.6;max-width:960px;margin:0 auto;padding:40px 24px}
@@ -69,8 +69,25 @@ hr{border:none;border-top:1px solid #dfe1e6;margin:28px 0}
 .d-uniq{background:#ffebe6;color:#bf2600}
 .d-cons{background:#f3f0ff;color:#403294}
 .d-time{background:#e6fcff;color:#006699}
-td.err{background:#fff3f3}
-td.ok{background:#f3fff5}
+.interviewer{background:#f0f4ff;border:1px solid #b3c6ff;border-radius:4px;padding:14px 16px;margin:12px 0;font-size:13px}
+.interviewer::before{content:"🎙 Интервьюер: ";font-weight:700;color:#0052cc}
+.redFlag{background:#fff0f0;border-left:3px solid #de350b;padding:8px 12px;margin:6px 0;font-size:13px;border-radius:0 3px 3px 0}
+.greenFlag{background:#f0fff4;border-left:3px solid #36b37e;padding:8px 12px;margin:6px 0;font-size:13px;border-radius:0 3px 3px 0}
+.score-chip{display:inline-block;background:#0052cc;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;margin-left:8px}
+.section-interviewer{background:#f8f9ff;border:2px solid #b3c6ff;border-radius:6px;padding:20px;margin:20px 0}
+.section-interviewer h4{color:#0052cc;font-size:14px;font-weight:700;margin-bottom:12px}
+.q-block{border-left:3px solid #0052cc;padding:10px 14px;margin:10px 0;background:#fff}
+.q-block .q{font-size:14px;font-weight:600;color:#172b4d;margin-bottom:6px}
+.q-block .a-good{font-size:13px;color:#006644}
+.q-block .a-bad{font-size:13px;color:#bf2600}
+.timeline{display:flex;gap:0;margin:16px 0;border:1px solid #dfe1e6;border-radius:6px;overflow:hidden}
+.tl-block{flex:1;padding:10px 12px;text-align:center;font-size:12px;border-right:1px solid #dfe1e6}
+.tl-block:last-child{border-right:none}
+.tl-block .tl-time{font-weight:700;font-size:14px;color:#172b4d}
+.tl-block .tl-label{color:#5e6c84;margin-top:2px}
+.tl-block.active{background:#e3f2fd}
+.score-table td{font-size:13px}
+.score-total{background:#172b4d;color:#fff;font-weight:700;font-size:15px;text-align:center;padding:12px;border-radius:4px;margin:14px 0}
 </style>
 <!-- Mermaid -->
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
@@ -78,30 +95,37 @@ td.ok{background:#f3fff5}
 </head>
 <body>
 
-<h1>DQ Design Challenge — Senior Data Quality Engineer</h1>
+<h1>Senior Data Quality Engineer — Практический кейс</h1>
 
 <div class="meta-row">
-<span class="meta-tag">⏱ 60 минут</span>
-<span class="meta-tag">📐 Проектирование</span>
+<span class="meta-tag">⏱ 90 минут</span>
+<span class="meta-tag">📐 Проектирование + дискуссия</span>
 <span class="meta-tag">🎯 Senior</span>
-<span class="meta-tag">✏️ Excalidraw / Miro</span>
+<span class="meta-tag">✏️ Excalidraw</span>
+</div>
+
+<div class="timeline">
+<div class="tl-block active"><div class="tl-time">0–10</div><div class="tl-label">Брифинг + данные</div></div>
+<div class="tl-block"><div class="tl-time">10–25</div><div class="tl-label">T1: Диагностика</div></div>
+<div class="tl-block"><div class="tl-time">25–60</div><div class="tl-label">T2: Архитектура</div></div>
+<div class="tl-block"><div class="tl-time">60–75</div><div class="tl-label">T3: Метрики</div></div>
+<div class="tl-block"><div class="tl-time">75–90</div><div class="tl-label">T4: Инцидент</div></div>
 </div>
 
 <div class="info">
-<strong>Формат:</strong> Кандидат получает этот документ, изучает ситуацию и проектирует решение. Рисует схемы в <a href="https://excalidraw.com" target="_blank" style="color:#006644">Excalidraw</a>. Никакого кода запускать не нужно. Интервьюер задаёт вопросы по ходу.
+<strong>Для интервьюера:</strong> Кандидат получает этот документ и открывает <a href="https://excalidraw.com" target="_blank" style="color:#006644">Excalidraw</a>. Вы ведёте разговор по скриптам ниже. Оценивайте не только ответы, но и то, как человек думает вслух, задаёт ли уточняющие вопросы, сам ли называет инструменты без подсказок.
 </div>
 
 <!-- ============================================================ -->
-<h2>1. Ситуация</h2>
+<h2>1. Контекст — читает кандидат</h2>
 
-<p>Компания — крупный ритейлер, 8 000 сотрудников. В центральное HR-хранилище данные поступают из нескольких систем. Конечные потребители — Payroll (расчёт зарплат каждую ночь), HR BI, Compliance-отчёты в ФНС/ПФР.</p>
+<p>Компания — крупный ритейлер, 8 000 сотрудников. Данные о персонале поступают из нескольких систем через Kafka в центральное хранилище. Потребители: Payroll (расчёт зарплат каждую ночь в 02:00), HR BI, Compliance-отчёты в ФНС и ПФР.</p>
 
 <div class="warning">
-<strong>Инцидент:</strong> Регулятор прислал замечание — задвоенные выплаты у 17 сотрудников, 4 сотрудника без трудовых договоров в отчёте. Финансовые потери ~4,2 млн руб. за полгода. Команда не знает, откуда пришли грязные данные — нет ни одной DQ-проверки, нет мониторинга.
+<strong>Что произошло:</strong> Регулятор прислал замечание — в квартальном отчёте задвоенные выплаты у 17 сотрудников и 4 сотрудника без трудовых договоров. Финансовые потери ~4,2 млн руб. за полгода. Никаких DQ-проверок нет, откуда пришли грязные данные — неизвестно.
 </div>
 
-<h3>Что сейчас есть — схема AS-IS</h3>
-<p>CDC-события и API-ответы падают напрямую в хранилище через Kafka, но без слоёв и без проверок качества. Airflow формально запускает пайплайны, но никаких DQ-шагов нет:</p>
+<h3>Текущая архитектура (AS-IS)</h3>
 
 <div class="mermaid">
 flowchart LR
@@ -110,234 +134,381 @@ flowchart LR
     C[HRM SaaS\nREST API] --> K
     D[Legacy CSV\nbatch] --> K
     K([Kafka]) --> RAW
-    RAW[(RAW Layer\nвсё подряд, без DQ)] --> DWH
-    DWH[(DWH\nбез слоёв)] --> P[Payroll\n02:00]
+    RAW[(RAW\nбез слоёв)] --> DWH
+    DWH[(DWH\nбез DQ)] --> P[Payroll\n02:00]
     DWH --> BI[HR BI]
     DWH --> CMP[Compliance]
-    AF[Airflow\nDAG] -. запускает .-> RAW
-
+    AF[Airflow] -. оркестрирует .-> RAW
     style RAW fill:#ffebe6,stroke:#de350b
     style DWH fill:#ffebe6,stroke:#de350b
     style K fill:#fff3cd,stroke:#e6a817
     style AF fill:#e3f2fd,stroke:#1976d2
-    style A fill:#f4f5f7,stroke:#dfe1e6
-    style B fill:#f4f5f7,stroke:#dfe1e6
-    style C fill:#f4f5f7,stroke:#dfe1e6
-    style D fill:#f4f5f7,stroke:#dfe1e6
 </div>
 
-<div class="note">
-<strong>Задача кандидата:</strong> Спроектировать и нарисовать схему TO-BE — как должна выглядеть система с полноценным контролем качества данных.
-</div>
+<h3>Источники данных</h3>
+<table>
+<tr><th>Источник</th><th>Тип</th><th>Частота</th><th>Что передаёт</th></tr>
+<tr><td>1С:ЗУП</td><td>CDC (Debezium)</td><td>Каждый час</td><td>Приказы, оклады, ставки</td></tr>
+<tr><td>1С:ДО</td><td>CDC</td><td>Раз в сутки</td><td>Договоры, доп. соглашения</td></tr>
+<tr><td>HRM SaaS</td><td>REST API</td><td>Real-time</td><td>Профили, должности, орг. структура</td></tr>
+<tr><td>Legacy CSV</td><td>Batch</td><td>Раз в неделю</td><td>Исторические данные до 2019 г.</td></tr>
+</table>
 
 <!-- ============================================================ -->
-<h2>2. Данные — что реально приходит</h2>
+<h2>2. Данные — смотрит кандидат</h2>
 
-<p>Вот примеры записей из двух таблиц, которые сейчас без проверок попадают в хранилище. В них зашиты реальные проблемы.</p>
+<p>Реальные записи, которые сейчас попадают в хранилище без каких-либо проверок:</p>
 
-<h3>employee_profile</h3>
+<h3>Таблица: employee_profile</h3>
 <table>
 <tr><th>emp_id</th><th>full_name</th><th>doc_number</th><th>bank_account</th><th>hire_date</th><th>dept_code</th></tr>
 <tr><td>E-1001</td><td>Иванов А.С.</td><td>4512 345678</td><td>40817810012345678901</td><td>2021-03-15</td><td>D-05</td></tr>
-<tr style="background:#fff3f3"><td>E-1002</td><td><em style="color:#de350b">—</em></td><td><em style="color:#de350b">45AB INVALID</em></td><td>40817810098765432100</td><td>2022-07-01</td><td>D-12</td></tr>
-<tr style="background:#fff3f3"><td>E-1003</td><td>Петров К.Н.</td><td>7701 112233</td><td><em style="color:#de350b">408178100123456</em></td><td>2020-11-30</td><td>D-05</td></tr>
-<tr style="background:#fff3f3"><td><em style="color:#de350b">E-1003</em></td><td>Петров К.Н.</td><td>7701 112233</td><td>408178100123456</td><td>2020-11-30</td><td>D-05</td></tr>
-<tr style="background:#fff3f3"><td>E-1004</td><td>Сидорова М.Р.</td><td>9900 667788</td><td>40817810011112222333</td><td><em style="color:#de350b">2035-01-01</em></td><td><em style="color:#de350b">D-99</em></td></tr>
+<tr><td>E-1002</td><td>—</td><td>45AB INVALID</td><td>40817810098765432100</td><td>2022-07-01</td><td>D-12</td></tr>
+<tr><td>E-1003</td><td>Петров К.Н.</td><td>7701 112233</td><td>408178100123456</td><td>2020-11-30</td><td>D-05</td></tr>
+<tr><td>E-1003</td><td>Петров К.Н.</td><td>7701 112233</td><td>408178100123456</td><td>2020-11-30</td><td>D-05</td></tr>
+<tr><td>E-1004</td><td>Сидорова М.Р.</td><td>9900 667788</td><td>40817810011112222333</td><td>2035-01-01</td><td>D-99</td></tr>
 <tr><td>E-1005</td><td>Козлов Д.В.</td><td>5511 445566</td><td>40817810055556666777</td><td>2019-05-20</td><td>D-05</td></tr>
 </table>
 
-<h3>employment_record</h3>
+<h3>Таблица: employment_record</h3>
 <table>
 <tr><th>emp_id</th><th>job_title</th><th>salary_amount</th><th>contract_type</th><th>vacation_days</th><th>is_fixed_term</th></tr>
 <tr><td>E-1001</td><td>Аналитик</td><td>95 000</td><td>permanent</td><td>28</td><td>false</td></tr>
-<tr style="background:#fff3f3"><td>E-1002</td><td><em style="color:#de350b">—</em></td><td><em style="color:#de350b">0</em></td><td>permanent</td><td>28</td><td>false</td></tr>
-<tr style="background:#fff3f3"><td>E-1003</td><td>Менеджер</td><td><em style="color:#de350b">-5 000</em></td><td>fixed</td><td><em style="color:#de350b">28</em></td><td>true</td></tr>
-<tr style="background:#fff3f3"><td><em style="color:#de350b">E-1006</em></td><td>Инженер</td><td>110 000</td><td>permanent</td><td>28</td><td>false</td></tr>
+<tr><td>E-1002</td><td>—</td><td>0</td><td>permanent</td><td>28</td><td>false</td></tr>
+<tr><td>E-1003</td><td>Менеджер</td><td>-5 000</td><td>fixed</td><td>28</td><td>true</td></tr>
+<tr><td>E-1006</td><td>Инженер</td><td>110 000</td><td>permanent</td><td>28</td><td>false</td></tr>
 <tr><td>E-1004</td><td>Директор</td><td>250 000</td><td>permanent</td><td>28</td><td>false</td></tr>
 </table>
-
-<div class="note">
-<strong>Строки выделены красным</strong> — в них есть проблемы. Кандидат должен их идентифицировать и объяснить бизнес-последствия без подсказок.
-</div>
 
 <!-- ============================================================ -->
 <h2>3. Задания</h2>
 
+<!-- T1 -->
 <div class="task t-orange">
 <div class="task-header">
 <span class="task-num orange">T1</span>
-<span class="task-title">Диагностика данных</span>
-<span class="task-time">10 мин</span>
+<span class="task-title">Диагностика данных — устный спич</span>
+<span class="task-time">15 мин</span>
 </div>
-
-<p>Перед вами данные, которые реально поступают в хранилище. Посмотрите на них и <strong>расскажите</strong>: какие проблемы вы видите, по каким параметрам качества они разбиваются и какие критерии проверок вы бы предложили для этого домена — своими словами, как будто объясняете это команде.</p>
-
-<div class="note">
-<strong>Интервьюер слушает спич.</strong> Не нужно заполнять таблицу — нужно услышать, как кандидат мыслит: находит ли он связь между техническими ошибками и бизнес-последствиями, умеет ли самостоятельно предложить правила контроля.
-</div>
+<p>Посмотрите на данные выше. Расскажите своими словами: что здесь не так, по каким параметрам качества это классифицируется и какие правила проверки вы бы поставили для этого домена.</p>
+<div class="note"><strong>Не нужно заполнять таблицы</strong> — интервьюер слушает, как вы мыслите. Говорите вслух.</div>
 
 <div class="answer-block">
-<div class="answer-title">🔒 Ориентир для интервьюера — что должен сказать Senior</div>
+<div class="answer-title">🔒 Эталон + скрипт для интервьюера</div>
+
+<p><strong>Что должен найти Senior (минимум 5 из 6):</strong></p>
 <table>
-<tr><th>Запись</th><th>Проблема</th><th>Измерение DQ</th><th>Бизнес-риск</th></tr>
-<tr><td>E-1002</td><td>Пустое ФИО, невалидный формат паспорта, salary = 0</td><td><span class="dim-badge d-com">Completeness</span> <span class="dim-badge d-acc">Accuracy</span> <span class="dim-badge d-val">Validity</span></td><td>Payroll начислит 0 руб. Жалоба в ГИТ</td></tr>
-<tr><td>E-1003 (дубль)</td><td>emp_id дважды — дубликат PK</td><td><span class="dim-badge d-uniq">Uniqueness</span></td><td>Двойное начисление зарплаты → замечание регулятора</td></tr>
-<tr><td>E-1003 bank_account</td><td>15 цифр вместо 20</td><td><span class="dim-badge d-acc">Accuracy</span></td><td>Перевод вернётся — сотрудник не получит деньги</td></tr>
-<tr><td>E-1003 (зарплата)</td><td>salary = -5 000; is_fixed_term=true, vacation_days=28 (макс 14 по ТК)</td><td><span class="dim-badge d-val">Validity</span></td><td>Отрицательный расчёт + нарушение ТК</td></tr>
-<tr><td>E-1004</td><td>hire_date = 2035 (будущее); dept_code D-99 не существует</td><td><span class="dim-badge d-acc">Accuracy</span> <span class="dim-badge d-cons">Consistency</span></td><td>Некорректные BI-отчёты, фантомный отдел в структуре</td></tr>
-<tr><td>E-1006</td><td>Есть в employment_record, нет в employee_profile</td><td><span class="dim-badge d-cons">Consistency</span></td><td>Сотрудник без договора в Compliance-отчёте → штраф регулятора</td></tr>
+<tr><th>Запись</th><th>Проблема</th><th>DQ-измерение</th><th>Бизнес-риск</th></tr>
+<tr><td>E-1002</td><td>ФИО пустое, doc_number невалидный формат, salary = 0</td><td><span class="dim-badge d-com">Completeness</span> <span class="dim-badge d-val">Validity</span></td><td>Payroll начислит 0 ₽ → жалоба в ГИТ</td></tr>
+<tr><td>E-1003 (×2)</td><td>emp_id дублируется — нарушение PK</td><td><span class="dim-badge d-uniq">Uniqueness</span></td><td>Двойное начисление зарплаты → замечание ФНС</td></tr>
+<tr><td>E-1003 bank</td><td>bank_account = 15 цифр вместо 20</td><td><span class="dim-badge d-acc">Accuracy</span></td><td>Перевод вернётся банком — сотрудник не получит деньги</td></tr>
+<tr><td>E-1003 salary</td><td>salary = -5 000; is_fixed_term=true, vacation_days=28 (ТК: макс 14)</td><td><span class="dim-badge d-val">Validity</span></td><td>Отрицательный расчёт + нарушение ТК РФ</td></tr>
+<tr><td>E-1004</td><td>hire_date = 2035 (будущее); dept_code D-99 — не существует</td><td><span class="dim-badge d-acc">Accuracy</span> <span class="dim-badge d-cons">Consistency</span></td><td>Фантомный отдел в BI-отчётах, кривая структура</td></tr>
+<tr><td>E-1006</td><td>Есть в employment_record, нет в employee_profile — orphan record</td><td><span class="dim-badge d-cons">Consistency</span></td><td>Сотрудник без договора в Compliance → штраф регулятора</td></tr>
 </table>
-<p style="margin-top:10px">Хороший кандидат также <em>сам предложит критерии</em>: salary > 0, emp_id уникален, банковский счёт = 20 цифр, hire_date ≤ today(), referential integrity между таблицами. Это и есть основа для DQ-правил.</p>
+
+<p style="margin-top:12px"><strong>Что должен сам предложить (критерии проверок):</strong> salary > 0, emp_id уникален, bank_account = ровно 20 цифр, hire_date ≤ today(), referential integrity между таблицами, формат doc_number = паспорт РФ.</p>
+
+<div class="interviewer">Если молчит больше 2 минут — спросите: «Посмотрите на E-1003 — что замечаете?» Это подсказка уровня ниже, фиксируйте что понадобилась.</div>
+<div class="interviewer">Дополнительный вопрос: «Какое из этих нарушений вы бы исправили первым и почему?» — проверяет умение приоритизировать по бизнес-риску.</div>
 </div>
 </div>
 
+<!-- T2 -->
 <div class="task t-red">
 <div class="task-header">
 <span class="task-num red">T2</span>
-<span class="task-title">Спроектируйте DQ-систему — схема TO-BE</span>
-<span class="task-time">25 мин</span>
+<span class="task-title">Спроектируйте DQ-систему — рисунок TO-BE</span>
+<span class="task-time">35 мин</span>
 </div>
-
-<p>Откройте <a href="https://excalidraw.com" target="_blank" style="color:#0052cc">Excalidraw</a> и нарисуйте целевую архитектуру системы контроля качества данных. Схема строится с нуля — никаких заготовок нет.</p>
-
-<div class="note">
-<strong>Интервьюер наблюдает и задаёт вопросы по ходу рисования.</strong> Важно не только что нарисовано, но и как кандидат объясняет свои решения.
-</div>
-
-<h3>Опорные вопросы (задаёт интервьюер)</h3>
-<ul>
-<li>Где именно в потоке ты поставишь DQ-проверки? Почему именно там?</li>
-<li>Что происходит с записью, которая не прошла проверку — CRITICAL vs WARNING?</li>
-<li>Как Payroll узнаёт, что данные готовы и безопасны для расчёта?</li>
-<li>Кто отвечает за исправление данных в карантине?</li>
-<li>Какой инструмент ты поставишь для мониторинга качества и почему?</li>
-</ul>
+<p>Откройте <a href="https://excalidraw.com" target="_blank" style="color:#0052cc">Excalidraw</a>. Нарисуйте целевую архитектуру системы контроля качества данных для этой компании. Рисуйте и объясняйте одновременно.</p>
+<p><strong>Схема должна отвечать:</strong> откуда берутся данные → где проверяются → что происходит с браком → как Payroll получает сигнал что данные готовы → как команда мониторит качество.</p>
 
 <div class="answer-block">
-<div class="answer-title">🔒 Эталон для интервьюера</div>
+<div class="answer-title">🔒 Эталон архитектуры + скрипт вопросов</div>
+
+<p><strong>Ожидаемая TO-BE схема:</strong></p>
+<div class="mermaid">
+flowchart LR
+    SRC["Источники\n1С:ЗУП · 1С:ДО\nHRM SaaS · CSV"] --> K([Kafka])
+    K --> RAW[(RAW Layer\nиммутабельно)]
+    RAW --> DQ1["DQ Engine 1\nSoda / dbt tests\nCompleteness · Validity\nUniqueness"]
+    DQ1 -->|PASS| STG[(Staging)]
+    DQ1 -->|CRITICAL| QUA[(Quarantine\n+ dq_errors)]
+    DQ1 -->|WARN| STG
+    STG --> DQ2["DQ Engine 2\nCross-table checks\nReferential integrity"]
+    DQ2 -->|PASS| CORE[(Core / DWH)]
+    CORE --> GW{Airflow\npayroll_gate}
+    GW -->|Score ≥ 99%| PAY[Payroll\n02:00]
+    GW -->|Score &lt; 99%| ALT[Alert\nSlack · PagerDuty]
+    CORE --> BI[HR BI]
+    CORE --> CMP[Compliance]
+    QUA --> DS[Data Steward\nSLA: 4h CRITICAL]
+    OM["OpenMetadata\nDQ Score UI\nData Catalog\nData Contracts"] -. мониторинг .-> CORE
+    style QUA fill:#ffebe6,stroke:#de350b
+    style GW fill:#fff3cd,stroke:#e6a817
+    style OM fill:#e3f2fd,stroke:#1976d2
+</div>
+
+<p><strong>Ключевые элементы которые должен назвать сам:</strong></p>
 <ul>
-<li><strong>Слои:</strong> RAW (всё как пришло из Kafka, иммутабельно) → Staging (очищенное, прошедшее DQ) → Core/DWH (только валидированные данные, готовые к потребителям). Кандидат должен назвать все три слоя и объяснить зачем каждый</li>
-<li><strong>Оркестрация:</strong> Airflow DAG — один таск на каждый шаг: ingest → raw → dq_check → staging → dq_cross → core → payroll_gate. Senior объяснит, что gate перед Payroll блокирует DAG если DQ Score ниже порога</li>
-<li><strong>Ingestion:</strong> Debezium + Kafka для CDC (1С:ЗУП, 1С:ДО), REST-коннектор для HRM SaaS, Airflow batch-оператор для Legacy CSV</li>
-<li><strong>DQ Engine:</strong> dbt tests на RAW → Staging + Soda Core / Great Expectations для профилирования + OpenMetadata как каталог и UI для DQ Score. Senior называет минимум 2 и объясняет зачем оба</li>
-<li><strong>Паттерн:</strong> Write → Audit → Publish. Кандидат называет сам — это маркер Senior vs Middle</li>
-<li><strong>Карантин:</strong> Отдельная схема, таблица dq_errors с причиной + источником + timestamp. Owner — Data Steward, SLA — 4ч CRITICAL / 24ч WARN</li>
-<li><strong>Мониторинг:</strong> DQ Score по измерениям в Grafana / OpenMetadata. Slack для WARN, PagerDuty для CRITICAL. Airflow-gate перед Payroll: если Validity+Uniqueness &lt; 99% — DAG падает и будит инженера</li>
+<li><strong>RAW → Staging → Core</strong> — три слоя, каждый с объяснением зачем</li>
+<li><strong>Write-Audit-Publish</strong> — паттерн. Маркер Senior: называет сам без подсказки</li>
+<li><strong>Soda Core / dbt tests</strong> — конкретные инструменты DQ-проверок с обоснованием разницы</li>
+<li><strong>OpenMetadata</strong> — каталог данных + UI для DQ Score + Data Contracts</li>
+<li><strong>Карантин</strong> — отдельная схема, таблица dq_errors, кто Owner, SLA</li>
+<li><strong>Airflow payroll_gate</strong> — таск который проверяет Score перед запуском Payroll</li>
+<li><strong>Data Contract</strong> — соглашение с источником 1С:ЗУП о формате данных</li>
 </ul>
+
+<div class="q-block">
+<div class="q">«Зачем нам три слоя — RAW, Staging, Core? Разве нельзя проверять прямо в DWH?»</div>
+<div class="a-good">✅ Хорошо: RAW иммутабелен — можно перечитать, если нашли баг в правилах. Staging — рабочая зона с незавершёнными проверками. Core — только то, чему доверяют потребители.</div>
+<div class="a-bad">🚩 Плохо: «Ну, так архитектурно принято» без объяснения зачем каждый слой.</div>
+</div>
+
+<div class="q-block">
+<div class="q">«Какой инструмент поставишь для DQ-проверок и почему именно он?»</div>
+<div class="a-good">✅ Хорошо: dbt tests — легковесно, в коде, версионируется. Soda — декларативные checks, удобен аналитикам. Great Expectations — гибкость. OpenMetadata — каталог + UI. Называет 2+ и объясняет когда что.</div>
+<div class="a-bad">🚩 Плохо: называет только один инструмент без trade-off, или называет только «что-то типа Great Expectations» не зная деталей.</div>
+</div>
+
+<div class="q-block">
+<div class="q">«Что такое Data Contract и зачем он нужен здесь?»</div>
+<div class="a-good">✅ Хорошо: формальное соглашение между владельцем источника (1С:ЗУП) и потребителем (DWH) — описывает схему, типы, допустимые значения, SLA поставки. Нарушение → алерт источнику, не только нам.</div>
+<div class="a-bad">🚩 Плохо: «Это что-то про контракты с поставщиками?» или полное непонимание концепции.</div>
+</div>
+
+<div class="q-block">
+<div class="q">«Кто такой Data Steward и чем он отличается от Data Engineer?»</div>
+<div class="a-good">✅ Хорошо: Data Steward — бизнес-роль, знает домен, принимает решения о качестве, отвечает за карантин. Data Engineer — строит пайплайны. Разные люди, разные ответственности.</div>
+<div class="a-bad">🚩 Плохо: «Это одно и то же» или не знает кто отвечает за карантин.</div>
+</div>
 </div>
 </div>
 
+<!-- T3 -->
 <div class="task t-green">
 <div class="task-header">
 <span class="task-num green">T3</span>
-<span class="task-title">DQ Score — как измерить качество в цифрах?</span>
-<span class="task-time">10 мин</span>
+<span class="task-title">DQ Score — как измерить и где порог?</span>
+<span class="task-time">15 мин</span>
 </div>
-
-<p>Вы нашли проблемы, нарисовали архитектуру. Теперь вопрос: <strong>как операционно понять, что данные достаточно хороши для Payroll?</strong></p>
-<p>Предложите подход к измерению качества: какие измерения важнее для HR-домена, как их взвесить и где поставить порог блокировки. Нарисуйте Scorecard в Excalidraw.</p>
+<p>Вы построили систему. Как операционно ответить на вопрос: «Данные сегодня хорошего качества?» Предложите подход к измерению и нарисуйте Scorecard в Excalidraw.</p>
 
 <div class="answer-block">
-<div class="answer-title">🔒 Эталон для интервьюера</div>
-<ul>
-<li>DQ Score = Σ(вес_i × доля_прошедших_записей_по_измерению_i). Кандидат должен сам прийти к взвешенной формуле</li>
-<li>Для HR: Validity и Uniqueness — самые тяжёлые (по 20-25%), прямой финансовый риск. Timeliness — наименее критично</li>
-<li>Порог блокировки Payroll: Validity ≥ 99% AND Uniqueness = 100%. Ниже — Airflow gate падает, уведомление</li>
-<li>Тренд важнее абсолюта: падение Score 3 дня подряд = алерт, даже если число выше порога</li>
-<li>Soda или OpenMetadata дают готовый UI для такого Scorecard — Senior должен это знать</li>
-</ul>
+<div class="answer-title">🔒 Эталон + скрипт</div>
+<p><strong>Ожидаемый Scorecard для HR-домена:</strong></p>
+<table class="score-table">
+<tr><th>Измерение</th><th>Вес</th><th>Почему такой вес</th><th>Порог блокировки Payroll</th></tr>
+<tr><td>Uniqueness</td><td>25%</td><td>Дубли emp_id = двойное начисление</td><td>= 100%</td></tr>
+<tr><td>Validity</td><td>25%</td><td>salary < 0, неверный формат счёта = прямые потери</td><td>≥ 99%</td></tr>
+<tr><td>Completeness</td><td>20%</td><td>Пустое ФИО = невозможно идентифицировать</td><td>≥ 98%</td></tr>
+<tr><td>Consistency</td><td>20%</td><td>Referential integrity = сирота в отчёте регулятора</td><td>≥ 99%</td></tr>
+<tr><td>Accuracy</td><td>10%</td><td>Будущая дата, неверный отдел — важно, но не критично</td><td>≥ 95%</td></tr>
+</table>
+<p style="margin-top:8px"><strong>Формула:</strong> DQ Score = Σ(вес_i × доля_прошедших_i). Payroll gate блокируется если Uniqueness &lt; 100% ИЛИ Validity &lt; 99%.</p>
+<p><strong>Тренд важнее числа:</strong> Score 98% три дня подряд и падает → алерт, даже если выше порога.</p>
+<p><strong>Инструмент:</strong> OpenMetadata или Soda Cloud дают готовый Scorecard UI — Senior должен это знать и предложить.</p>
+
+<div class="q-block">
+<div class="q">«Почему Timeliness не включил в Scorecard?»</div>
+<div class="a-good">✅ Хорошо: для HR-домена данные поступают батчами по расписанию, задержка редка и контролируется Airflow. Если бы был real-time домен — добавил бы.</div>
+<div class="a-bad">🚩 Плохо: «Забыл» или «Ну там SLA и так есть».</div>
+</div>
 </div>
 </div>
 
+<!-- T4 -->
 <div class="task t-purple">
 <div class="task-header">
 <span class="task-num purple">T4</span>
-<span class="task-title">Как ваша система справится с таким инцидентом?</span>
-<span class="task-time">10 мин</span>
+<span class="task-title">Инцидент в 02:00 — как реагирует система?</span>
+<span class="task-time">15 мин</span>
 </div>
 
-<p>Представьте: ваша DQ-система уже работает. Ночью Airflow запускает пайплайн перед Payroll и фиксирует следующую картину:</p>
-
+<p>Ваша DQ-система работает. Ночью Airflow запускает пайплайн. За 40 минут до Payroll система фиксирует:</p>
 <table>
-<tr><th>Тип проблемы</th><th>Количество записей</th><th>Severity</th></tr>
-<tr style="background:#fff3f3"><td>salary = 0 или salary &lt; 0</td><td>12</td><td><strong style="color:#de350b">CRITICAL</strong></td></tr>
-<tr style="background:#fff3f3"><td>Дубли emp_id</td><td>28</td><td><strong style="color:#de350b">CRITICAL</strong></td></tr>
-<tr style="background:#fffae6"><td>Незаполненный dept_code</td><td>47</td><td><strong style="color:#7f5f01">WARN</strong></td></tr>
+<tr><th>Проблема</th><th>Записей</th><th>Severity</th></tr>
+<tr><td>salary = 0 или salary &lt; 0</td><td>12</td><td><strong style="color:#de350b">CRITICAL</strong></td></tr>
+<tr><td>Дубли emp_id</td><td>28</td><td><strong style="color:#de350b">CRITICAL</strong></td></tr>
+<tr><td>Незаполненный dept_code</td><td>47</td><td><strong style="color:#7f5f01">WARN</strong></td></tr>
 </table>
+<p>Чистых записей: 1 913 из 2 000. Payroll в 02:00.</p>
 
-<p>Чистых записей: 1 913 из 2 000. До запуска Payroll — 40 минут.</p>
-
-<div class="warning">
-<strong>Вопрос:</strong> Расскажите, как ваша система обработает этот инцидент автоматически — и что потребует ручного вмешательства. Нарисуйте в Excalidraw.
-</div>
+<div class="warning"><strong>Вопрос:</strong> Расскажите что делает ваша система автоматически и что требует ручного решения. Нарисуйте схему эскалации.</div>
 
 <div class="answer-block">
-<div class="answer-title">🔒 Эталон для интервьюера — критерии зрелого ответа</div>
-<ul>
-<li><strong>Автоматика:</strong> Airflow gate видит CRITICAL → частичный запуск Payroll для 1 913 чистых записей, 40 CRITICAL → Quarantine, алерт уходит автоматически. «Блокируем всё и ждём» — красный флаг</li>
-<li><strong>Роутинг по severity:</strong> CRITICAL записи — в карантин без Payroll; WARN записи — в Core с флагом <code>dq_flag='WARN'</code>, Payroll их пропускает до исправления</li>
-<li><strong>Оповещения:</strong> Slack/PagerDuty → Data Engineer + Head of HR + FinDir. Кандидат должен назвать кто получает и в какой очерёдности</li>
-<li><strong>Incident ticket:</strong> Jira/Confluence с RCA — откуда пришли дубли (1С:ЗУП?), почему salary отрицательная</li>
-<li><strong>Превенция:</strong> Data Contract с источником — формализуем ожидаемый формат, чтобы источник знал требования заранее. Это маркер Senior: думает не только о реакции, но и о предотвращении</li>
-</ul>
+<div class="answer-title">🔒 Эталон + скрипт</div>
+
+<div class="greenFlag">✅ Зрелый ответ: частичный запуск Payroll для 1 913 чистых записей. 40 CRITICAL → Quarantine, 47 WARN → Core с dq_flag='WARN'. Алерты автоматически. Incident ticket с RCA.</div>
+<div class="redFlag">🚩 Красный флаг: «Стопим Payroll полностью и ждём исправления» — это потеря бизнеса, 1 913 человека не получат зарплату вовремя.</div>
+
+<p><strong>Полный ожидаемый сценарий:</strong></p>
+<ol>
+<li>Airflow gate: Uniqueness &lt; 100% → gate не блокирует весь Payroll, а исключает проблемные записи</li>
+<li>40 CRITICAL → Quarantine автоматически + Slack/PagerDuty → Data Engineer + Head of HR + FinDir (в этом порядке)</li>
+<li>47 WARN → Core с флагом, Payroll пропускает, BI видит метку</li>
+<li>1 913 чистых → Payroll запускается штатно</li>
+<li>Утром: Jira-тикет с RCA. Откуда дубли? Почему salary отрицательная? Кто owner в 1С:ЗУП?</li>
+<li>Долгосрочно: Data Contract с 1С:ЗУП — фиксируем что salary > 0, emp_id уникален, формат паспорта</li>
+</ol>
+
+<div class="q-block">
+<div class="q">«Кто должен принять решение — запускать ли Payroll частично — в 02:00 ночи?»</div>
+<div class="a-good">✅ Хорошо: решение должно быть закодировано в правилах системы заранее, не требовать звонка ночью. Senior думает о том чтобы убрать человека из критического пути.</div>
+<div class="a-bad">🚩 Плохо: «Звоним Head of HR» — это значит система не настроена, каждый инцидент будит людей.</div>
+</div>
+
+<div class="q-block">
+<div class="q">«Как вы предотвратите повторение этого инцидента?»</div>
+<div class="a-good">✅ Хорошо: Data Contract с источником, OpenMetadata для документирования ожиданий, мониторинг тренда Score (не только абсолютное значение), retro с командой источника.</div>
+<div class="a-bad">🚩 Плохо: «Добавим ещё одну проверку» без системного мышления о prevention vs reaction.</div>
+</div>
 </div>
 </div>
 
 <!-- ============================================================ -->
-<h2>4. Критерии оценки</h2>
+<h2>4. Скрипт интервьюера — вопросы по всей встрече</h2>
+
+<div class="section-interviewer">
+<h4>Разминка (первые 5 минут)</h4>
+<div class="q-block">
+<div class="q">«Расскажите про последний проект где вы занимались качеством данных. Какие инструменты использовали?»</div>
+<div class="a-good">✅ Ищем: конкретные инструменты (Soda, dbt, GE, OpenMetadata), конкретные проблемы которые решал, понимание ownershipа данных</div>
+<div class="a-bad">🚩 «Делал проверки в SQL» без инструментов, без упоминания мониторинга и процессов</div>
+</div>
+
+<div class="q-block">
+<div class="q">«Что такое Data Contract? Вы внедряли их в своей практике?»</div>
+<div class="a-good">✅ Формальное соглашение между продюсером и консюмером данных: схема, типы, SLA, версионирование. Инструменты: OpenMetadata, Soda Contracts, кастомные JSON Schema</div>
+<div class="a-bad">🚩 Путает с SLA, API-контрактами, или вообще не знает термин</div>
+</div>
+
+<div class="q-block">
+<div class="q">«Чем Soda отличается от Great Expectations? Когда вы бы выбрали одно vs другое?»</div>
+<div class="a-good">✅ Soda: YAML-декларативный, удобен аналитикам, Soda Cloud для UI. GE: Python-гибкость, сложные кастомные проверки. dbt tests: встроено в трансформации. Senior знает все три и объясняет trade-off</div>
+<div class="a-bad">🚩 «Они одинаковые» или знает только один</div>
+</div>
+</div>
+
+<div class="section-interviewer">
+<h4>Глубинные вопросы по архитектуре (после T2)</h4>
+
+<div class="q-block">
+<div class="q">«Как бы вы организовали OpenMetadata в этой схеме? Что там будет?»</div>
+<div class="a-good">✅ Каталог всех таблиц с описанием, владельцами, lineage. DQ checks привязаны к сущностям. Dashboard со Score по источникам. Data Contracts хранятся там же. Алерты при деградации</div>
+<div class="a-bad">🚩 «Это просто каталог для документации» — не видит операционной роли</div>
+</div>
+
+<div class="q-block">
+<div class="q">«Если источник 1С:ЗУП нарушил Data Contract — что происходит? Как вы об этом узнаёте?»</div>
+<div class="a-good">✅ RAW-слой принимает всё, Soda check сравнивает с контрактом на входе в Staging. Алерт с указанием поля и нарушения уходит Data Steward источника. В OpenMetadata фиксируется incident</div>
+<div class="a-bad">🚩 «Данные просто не пройдут проверку» без описания кто узнает и как отреагирует источник</div>
+</div>
+
+<div class="q-block">
+<div class="q">«Как вы думаете, с чего начать внедрение DQ в компании где ничего нет — с инструментов или с процессов?»</div>
+<div class="a-good">✅ С процессов и ownership: кто отвечает за данные каждого домена. Потом — profile данных (что вообще есть). Потом — критичные правила для Payroll. Инструменты — последние</div>
+<div class="a-bad">🚩 «Ставим Great Expectations и настраиваем» — инструментоцентричный подход без понимания people/process/technology</div>
+</div>
+</div>
+
+<div class="section-interviewer">
+<h4>Ситуационные вопросы</h4>
+
+<div class="q-block">
+<div class="q">«Бизнес говорит: DQ Score 97%, всё хорошо. Вы видите что 3% — это все записи с нулевой зарплатой. Как действуете?»</div>
+<div class="a-good">✅ Абсолютные цифры врут — нужно смотреть на состав ошибок, не только процент. Эскалирую с конкретикой: 60 человек получат 0 руб. Предлагаю разбить Score по критичности полей</div>
+<div class="a-bad">🚩 «Ну 97% — это норм» или «Зайду к бизнесу и скажу что всё плохо» без конкретики</div>
+</div>
+
+<div class="q-block">
+<div class="q">«Команда источника говорит: это не наша проблема, данные мы передаём правильно, это ваш DWH кривой. Что делаете?»</div>
+<div class="a-good">✅ Data Contract: показываем что именно ожидали, что получили. Фиксируем в OpenMetadata. Не конфликт, а факты. Если контракта нет — это наша вина, надо было зафиксировать</div>
+<div class="a-bad">🚩 «Буду спорить» или «Ладно, починим сами» без системного подхода</div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<h2>5. Оценочный лист</h2>
 
 <table>
-<tr><th style="width:22%">Что оцениваем</th><th style="width:38%">Ожидаем от Senior</th><th style="width:30%">Красный флаг</th><th style="width:10%">Вес</th></tr>
+<tr><th>Компетенция</th><th>0 — нет</th><th>1 — базово</th><th>2 — хорошо</th><th>3 — отлично</th><th>Вес</th></tr>
 <tr>
-<td><strong>T1 — Анализ данных</strong></td>
-<td>Находит ≥5 из 6 проблем. Для каждой — измерение DQ и конкретный бизнес-риск, не абстракция. Сам предлагает критерии проверок без подсказок</td>
-<td>Меньше 4 проблем. Не связывает ошибку с риском для бизнеса</td>
-<td style="text-align:center">20%</td>
+<td><strong>T1: Диагностика данных</strong></td>
+<td>&lt;3 проблем</td>
+<td>3–4 проблемы, без бизнес-риска</td>
+<td>5 проблем + риски</td>
+<td>Все 6 + сам предлагает правила</td>
+<td>×1</td>
 </tr>
 <tr>
-<td><strong>T2 — Архитектура TO-BE</strong></td>
-<td>Рисует слои RAW → Staging → Core. Называет Soda или OpenMetadata (хотя бы один). Объясняет зачем карантин и кто Data Owner. Сам произносит Write-Audit-Publish</td>
-<td>Абстрактные блоки без инструментов. Нет карантина. Не знает разницы между Staging и Core</td>
-<td style="text-align:center">35%</td>
+<td><strong>T2: Архитектура</strong></td>
+<td>Абстракция без слоёв</td>
+<td>3 слоя, без инструментов</td>
+<td>Слои + 1–2 инструмента + карантин</td>
+<td>Полная схема + WAP + OpenMetadata + Data Contract</td>
+<td>×2</td>
 </tr>
 <tr>
-<td><strong>T3 — DQ Score</strong></td>
-<td>Предлагает взвешенную формулу, приоритизирует Validity и Uniqueness для HR. Называет порог блокировки Payroll. Знает что Soda/OpenMetadata умеют показывать Scorecard</td>
-<td>Все измерения одинаковы. Нет мысли о пороге для Payroll</td>
-<td style="text-align:center">20%</td>
+<td><strong>T3: DQ Score</strong></td>
+<td>Не может предложить формулу</td>
+<td>Простой % без весов</td>
+<td>Взвешенная формула + порог</td>
+<td>Веса обоснованы + тренд + Soda/OM</td>
+<td>×1</td>
 </tr>
 <tr>
-<td><strong>T4 — Инцидент</strong></td>
-<td>Предлагает частичный запуск Payroll для чистых записей. Чётко разграничивает CRITICAL/WARN. Думает о Data Contract как о превентивной мере</td>
-<td>«Стопим Payroll полностью». Нет мысли о превенции. Не знает кто принимает решение</td>
-<td style="text-align:center">25%</td>
+<td><strong>T4: Инцидент</strong></td>
+<td>Стопим Payroll целиком</td>
+<td>Частичный запуск, нет превенции</td>
+<td>Частичный + алерты + RCA</td>
+<td>Автоматика + Data Contract + prevention mindset</td>
+<td>×1.5</td>
+</tr>
+<tr>
+<td><strong>Data Contract / OpenMetadata</strong></td>
+<td>Не знает термин</td>
+<td>Слышал, объяснить не может</td>
+<td>Объясняет концепцию</td>
+<td>Объясняет + описывает как внедрял</td>
+<td>×1.5</td>
+</tr>
+<tr>
+<td><strong>Ownership / процессы</strong></td>
+<td>Думает только про код</td>
+<td>Упоминает роли</td>
+<td>Разграничивает DE / DS / Owner</td>
+<td>Строит операционный процесс, думает про people</td>
+<td>×1</td>
 </tr>
 </table>
 
-<hr>
+<div class="score-total">Максимум: 3 × (1+2+1+1.5+1.5+1) = 24 балла</div>
 
-<h2>5. Вердикт</h2>
+<h2>6. Вердикт</h2>
 
 <div class="verdict-row">
 <div class="verdict-card g">
-<div class="v-score">Hire ✓</div>
-<div class="v-label">Уверенный Senior</div>
-<div class="v-desc">Все задания пройдены без подсказок. Называет инструменты, объясняет trade-off, думает об операционном процессе и Data Contract</div>
+<div class="v-score">Hire</div>
+<div class="v-label">18–24 балла</div>
+<div class="v-desc">Называет инструменты сам. Знает Data Contract и OpenMetadata. Думает о превенции, не только реакции. Write-Audit-Publish — сам.</div>
 </div>
 <div class="verdict-card y">
 <div class="v-score">Maybe</div>
-<div class="v-label">Middle+ / нужен менторинг</div>
-<div class="v-desc">T1-T2 хорошо, T3-T4 с наводящими вопросами. Инструменты знает, но не видит полной операционной картины</div>
+<div class="v-label">11–17 баллов</div>
+<div class="v-desc">Архитектуру строит, инструменты знает базово. Data Contract — слышал. Нужны подсказки на T3–T4. Подойдёт при наличии ментора.</div>
 </div>
 <div class="verdict-card r">
 <div class="v-score">No Hire</div>
-<div class="v-label">Не Senior</div>
-<div class="v-desc">Не классифицирует ошибки, рисует абстракции без инструментов, блокирует Payroll целиком, не знает что такое Data Contract</div>
+<div class="v-label">0–10 баллов</div>
+<div class="v-desc">Не знает DQ-измерений, рисует абстракции, Data Contract — пустой звук, Payroll блокирует целиком. Это Middle в лучшем случае.</div>
 </div>
 </div>
 
-<div class="note">
-<strong>Совет интервьюеру:</strong> если кандидат застрял — дайте подсказку на уровень ниже (тип проблемы, не инструмент). Фиксируйте сколько подсказок понадобилось — это часть оценки.
+<div class="note" style="margin-top:20px">
+<strong>Правило подсказок:</strong> каждая подсказка от интервьюера снижает оценку за блок на 1 уровень. Фиксируйте сколько подсказок понадобилось — это часть оценки зрелости.
 </div>
 
 </body>
