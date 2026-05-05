@@ -46,13 +46,28 @@ hr{border:none;border-top:1px solid #dfe1e6;margin:24px 0}
 .task-title{font-size:16px;font-weight:700}
 .task-time{margin-left:auto;font-size:12px;background:#f4f5f7;color:#5e6c84;padding:3px 12px;border-radius:20px}
 
-/* ---- Excalidraw copy block ---- */
-.excali{background:#1e1e2e;border-radius:8px;padding:16px 20px;margin:14px 0;position:relative}
-.excali-lbl{font-size:11px;font-weight:700;color:#a78bfa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
-.excali pre{background:transparent;padding:0;margin:0;color:#cdd6f4;font-size:12px;font-family:'SF Mono',Monaco,monospace;line-height:1.7;white-space:pre-wrap;word-break:break-word}
-.copy-btn{position:absolute;top:12px;right:12px;background:#7c6af7;color:#fff;border:none;border-radius:5px;padding:5px 12px;font-size:12px;font-weight:600;cursor:pointer;transition:background .15s}
-.copy-btn:hover{background:#6c5ce7}
-.copy-btn.copied{background:#36b37e}
+/* ---- Excalidraw open block ---- */
+.excali-box{background:#1e1e2e;border-radius:8px;padding:18px 20px;margin:14px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.excali-box .ex-text{color:#cdd6f4;font-size:13px}
+.excali-box .ex-text strong{color:#a78bfa}
+.open-btn{background:#7c6af7;color:#fff;border:none;border-radius:6px;padding:10px 20px;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;transition:background .15s}
+.open-btn:hover{background:#6c5ce7}
+/* ---- CSS diagram ---- */
+.diag{background:#fff;border:1px solid #dfe1e6;border-radius:8px;padding:20px;margin:12px 0;overflow-x:auto}
+.diag-row{display:flex;align-items:center;gap:0;flex-wrap:nowrap;margin-bottom:8px}
+.diag-sources{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-bottom:4px}
+.db{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;border-radius:6px;padding:8px 12px;font-size:12px;font-weight:600;text-align:center;min-width:100px;min-height:52px;border:2px solid;line-height:1.3}
+.db-src{background:#f8faff;border-color:#b3c6ff;color:#0052cc}
+.db-kafka{background:#fff8e1;border-color:#f59e0b;color:#92400e;border-radius:20px}
+.db-dwh{background:#ffebe6;border-color:#de350b;color:#bf2600}
+.db-airflow{background:#e3f2fd;border-color:#1976d2;color:#1565c0}
+.db-consumer{background:#f3f0ff;border-color:#6554c0;color:#403294}
+.db-payroll{background:#e3fcef;border-color:#36b37e;color:#006644}
+.arrow{font-size:20px;color:#5e6c84;margin:0 6px;flex-shrink:0}
+.arrow-down{text-align:center;font-size:18px;color:#5e6c84;margin:2px 0}
+.diag-label{font-size:11px;color:#5e6c84;margin-top:3px;font-weight:400}
+.diag-section{margin-bottom:12px}
+.diag-title{font-size:11px;font-weight:700;color:#5e6c84;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
 
 /* ---- Interviewer panels ---- */
 .iv-panel{background:#f0f4ff;border:2px solid #b3c6ff;border-radius:6px;padding:16px 20px;margin:14px 0}
@@ -95,8 +110,6 @@ hr{border:none;border-top:1px solid #dfe1e6;margin:24px 0}
 body.mode-iv .iv-only{display:block}
 body.mode-cand .iv-only{display:none}
 </style>
-<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-<script>mermaid.initialize({startOnLoad:true,theme:'default',flowchart:{curve:'basis'}})</script>
 </head>
 <body class="mode-cand">
 <div class="page">
@@ -138,20 +151,44 @@ body.mode-cand .iv-only{display:none}
 <h3>Текущая архитектура (AS-IS)</h3>
 <p>Данные из источников идут через Kafka напрямую в одну общую таблицу DWH. Airflow запускает пайплайны по расписанию, но DQ-шагов внутри нет:</p>
 
-<div class="mermaid">
-flowchart LR
-    Z["1С:ЗУП\nCDC каждый час"] --> K
-    Do["1С:ДО\nCDC раз в сутки"] --> K
-    H["HRM SaaS\nREST API"] --> K
-    L["Legacy CSV\nbatch раз в неделю"] --> K
-    K(["Kafka"]) --> DWH
-    DWH[("HR DWH\n⚠ нет слоёв\n⚠ нет проверок качества")] --> P["Payroll\n02:00"]
-    DWH --> BI["HR BI"]
-    DWH --> CMP["Compliance"]
-    AF["Airflow\nDAG"] -. "запускает по расписанию" .-> DWH
-    style DWH fill:#ffebe6,stroke:#de350b,stroke-width:2px
-    style K fill:#fff8e1,stroke:#f59e0b
-    style AF fill:#e3f2fd,stroke:#1976d2
+<div class="diag">
+  <div class="diag-section">
+    <div class="diag-title">Источники данных</div>
+    <div class="diag-sources">
+      <div class="db db-src">1С:ЗУП<div class="diag-label">CDC · каждый час</div></div>
+      <div class="db db-src">1С:ДО<div class="diag-label">CDC · раз в сутки</div></div>
+      <div class="db db-src">HRM SaaS<div class="diag-label">REST API</div></div>
+      <div class="db db-src">Legacy CSV<div class="diag-label">batch · раз в неделю</div></div>
+    </div>
+    <div class="arrow-down">↓ ↓ ↓ ↓</div>
+  </div>
+
+  <div class="diag-section" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+    <div>
+      <div class="db db-kafka" style="min-width:120px">🟡 Kafka<div class="diag-label">очередь событий</div></div>
+    </div>
+    <div class="arrow">→</div>
+    <div style="flex:1">
+      <div class="db db-dwh" style="width:100%;min-width:180px">
+        ⚠️ HR DWH
+        <div class="diag-label" style="color:#bf2600">нет слоёв · нет DQ-проверок · всё вместе</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:4px">
+      <div class="db db-airflow" style="min-width:110px">Airflow<div class="diag-label">только расписание</div></div>
+    </div>
+  </div>
+
+  <div class="arrow-down">↓</div>
+
+  <div class="diag-section">
+    <div class="diag-title">Потребители (получают данные как есть)</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <div class="db db-payroll">💰 Payroll<div class="diag-label">02:00 каждую ночь</div></div>
+      <div class="db db-consumer">📊 HR BI<div class="diag-label">дашборды</div></div>
+      <div class="db db-consumer">📋 Compliance<div class="diag-label">ФНС · ПФР</div></div>
+    </div>
+  </div>
 </div>
 
 <table>
@@ -242,40 +279,15 @@ flowchart LR
     <strong>Инструкция:</strong> Откройте <a href="https://excalidraw.com" target="_blank" style="color:#7f5f01">excalidraw.com</a>, нарисуйте схему с нуля. Ниже — блоки AS-IS которые можно скопировать как отправную точку.
   </div>
 
-  <div class="excali" id="excali-block">
-    <div class="excali-lbl">✏ Стартовые блоки для Excalidraw — скопируй и доработай</div>
-    <button class="copy-btn" onclick="copyExcali()">Копировать</button>
-    <pre id="excali-text">Источники:
-[ 1С:ЗУП ]  [ 1С:ДО ]  [ HRM SaaS ]  [ Legacy CSV ]
-      |              |           |                |
-      +──────────────┴───────────┴────────────────+
-                          |
-                      ( Kafka )
-                          |
-                   ┌──────▼──────┐
-                   │  RAW Layer  │  ← иммутабельный, всё как пришло
-                   └──────┬──────┘
-                          │ DQ Engine (?)
-                   ┌──────▼──────┐
-                   │   Staging   │  ← прошло проверки
-                   └──────┬──────┘
-                     │         │
-               [Quarantine]  DQ Engine 2 (?)
-                               │
-                        ┌──────▼──────┐
-                        │    Core     │  ← только доверенные данные
-                        └──────┬──────┘
-                               │
-                    ┌──────────┼──────────┐
-                 [Payroll]   [BI]   [Compliance]
-                  02:00
-
-Добавь:
-- Какой DQ инструмент между слоями?
-- Что уходит в Quarantine и кто за него отвечает?
-- Как Airflow gate проверяет готовность перед Payroll?
-- Где мониторинг качества (UI, алерты)?</pre>
+  <div class="excali-box">
+    <div class="ex-text">
+      <strong>✏ Стартовая схема TO-BE в Excalidraw</strong><br>
+      Нажмите кнопку — схема скопируется в буфер. Откройте Excalidraw и нажмите <strong>Ctrl+V / Cmd+V</strong> — блоки вставятся сразу.
+    </div>
+    <button class="open-btn" onclick="copyExcalidrawJSON()">📋 Скопировать схему</button>
   </div>
+  <div id="excali-copied" style="display:none" class="info" style="margin-top:0">✅ Схема скопирована! Откройте <a href="https://excalidraw.com" target="_blank">excalidraw.com</a> и нажмите Cmd+V (Mac) или Ctrl+V (Win).</div>
+  <div class="note" style="margin-top:0"><strong>Что дорисовать:</strong> DQ-инструменты между слоями (Soda? dbt? GE?), Airflow gate перед Payroll, кто Owner карантина, мониторинг качества. Объясняйте каждый блок вслух по ходу рисования.</div>
 
   <div class="iv-only">
     <div class="iv-panel">
@@ -491,13 +503,116 @@ function setMode(m) {
   document.getElementById('btn-cand').classList.toggle('active', m === 'cand');
   document.getElementById('btn-iv').classList.toggle('active', m === 'iv');
 }
-function copyExcali() {
-  const text = document.getElementById('excali-text').innerText;
+
+function copyExcalidrawJSON() {
+  const schema = {
+    "type": "excalidraw",
+    "version": 2,
+    "source": "dq-case",
+    "elements": [
+      // ---- SOURCES row ----
+      {"id":"src1","type":"rectangle","x":20,"y":40,"width":120,"height":56,"angle":0,"strokeColor":"#1971c2","backgroundColor":"#e7f5ff","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"","fontSize":14,"fontFamily":1,"textAlign":"center","verticalAlign":"middle","roundness":{"type":3}},
+      {"id":"src1t","type":"text","x":30,"y":52,"width":100,"height":34,"angle":0,"strokeColor":"#1971c2","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"1С:ЗУП\nCDC · 1ч","fontSize":13,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
+      {"id":"src2","type":"rectangle","x":160,"y":40,"width":120,"height":56,"angle":0,"strokeColor":"#1971c2","backgroundColor":"#e7f5ff","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"text":""},
+      {"id":"src2t","type":"text","x":170,"y":52,"width":100,"height":34,"angle":0,"strokeColor":"#1971c2","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"1С:ДО\nCDC · 1 сутки","fontSize":13,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
+      {"id":"src3","type":"rectangle","x":300,"y":40,"width":120,"height":56,"angle":0,"strokeColor":"#1971c2","backgroundColor":"#e7f5ff","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"text":""},
+      {"id":"src3t","type":"text","x":310,"y":52,"width":100,"height":34,"angle":0,"strokeColor":"#1971c2","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"HRM SaaS\nREST API","fontSize":13,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
+      {"id":"src4","type":"rectangle","x":440,"y":40,"width":120,"height":56,"angle":0,"strokeColor":"#1971c2","backgroundColor":"#e7f5ff","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"text":""},
+      {"id":"src4t","type":"text","x":450,"y":52,"width":100,"height":34,"angle":0,"strokeColor":"#1971c2","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"Legacy CSV\nbatch · 1 неделя","fontSize":13,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
+      // arrows src → kafka
+      {"id":"a1","type":"arrow","x":80,"y":96,"width":0,"height":44,"angle":0,"strokeColor":"#868e96","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[0,44]],"lastCommittedPoint":null,"startBinding":{"elementId":"src1","focus":0,"gap":1},"endBinding":{"elementId":"kafka","focus":0,"gap":1}},
+      {"id":"a2","type":"arrow","x":220,"y":96,"width":0,"height":44,"angle":0,"strokeColor":"#868e96","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[0,44]],"lastCommittedPoint":null,"startBinding":{"elementId":"src2","focus":0,"gap":1},"endBinding":{"elementId":"kafka","focus":0,"gap":1}},
+      {"id":"a3","type":"arrow","x":360,"y":96,"width":0,"height":44,"angle":0,"strokeColor":"#868e96","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[0,44]],"lastCommittedPoint":null,"startBinding":{"elementId":"src3","focus":0,"gap":1},"endBinding":{"elementId":"kafka","focus":0,"gap":1}},
+      {"id":"a4","type":"arrow","x":500,"y":96,"width":0,"height":44,"angle":0,"strokeColor":"#868e96","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[0,44]],"lastCommittedPoint":null,"startBinding":{"elementId":"src4","focus":0,"gap":1},"endBinding":{"elementId":"kafka","focus":0,"gap":1}},
+      // ---- KAFKA ----
+      {"id":"kafka","type":"ellipse","x":200,"y":160,"width":180,"height":56,"angle":0,"strokeColor":"#e67700","backgroundColor":"#fff3bf","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100},
+      {"id":"kafkat","type":"text","x":215,"y":176,"width":150,"height":24,"angle":0,"strokeColor":"#e67700","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"⚡ Kafka","fontSize":15,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
+      // kafka → raw
+      {"id":"a5","type":"arrow","x":290,"y":216,"width":0,"height":44,"angle":0,"strokeColor":"#868e96","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[0,44]]},
+      // ---- RAW ----
+      {"id":"raw","type":"rectangle","x":180,"y":280,"width":220,"height":60,"angle":0,"strokeColor":"#495057","backgroundColor":"#f8f9fa","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100},
+      {"id":"rawt","type":"text","x":190,"y":292,"width":200,"height":36,"angle":0,"strokeColor":"#495057","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"📦 RAW Layer\nиммутабельно, всё как пришло","fontSize":12,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
+      // raw → dq1 (placeholder)
+      {"id":"a6","type":"arrow","x":290,"y":340,"width":0,"height":40,"angle":0,"strokeColor":"#868e96","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[0,40]]},
+      // ---- DQ ENGINE 1 placeholder ----
+      {"id":"dq1","type":"rectangle","x":180,"y":400,"width":220,"height":56,"angle":0,"strokeColor":"#9775fa","backgroundColor":"#f3f0ff","fillStyle":"solid","strokeWidth":2,"strokeStyle":"dashed","roughness":0,"opacity":100},
+      {"id":"dq1t","type":"text","x":190,"y":412,"width":200,"height":32,"angle":0,"strokeColor":"#7048e8","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"🔍 DQ Engine — ??? \nдобавь инструмент","fontSize":12,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
+      // dq1 → staging (PASS)
+      {"id":"a7","type":"arrow","x":290,"y":456,"width":0,"height":40,"angle":0,"strokeColor":"#2f9e44","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[0,40]]},
+      {"id":"a7l","type":"text","x":295,"y":468,"width":60,"height":20,"angle":0,"strokeColor":"#2f9e44","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"PASS ✓","fontSize":11,"fontFamily":1,"textAlign":"left","verticalAlign":"middle"},
+      // dq1 → quarantine (CRITICAL)
+      {"id":"a8","type":"arrow","x":400,"y":428,"width":120,"height":0,"angle":0,"strokeColor":"#e03131","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[120,0]]},
+      {"id":"a8l","type":"text","x":415,"y":412,"width":90,"height":20,"angle":0,"strokeColor":"#e03131","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"CRITICAL 🚫","fontSize":11,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
+      // ---- QUARANTINE ----
+      {"id":"qua","type":"rectangle","x":540,"y":400,"width":160,"height":120,"angle":0,"strokeColor":"#e03131","backgroundColor":"#fff5f5","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100},
+      {"id":"quat","type":"text","x":548,"y":416,"width":144,"height":88,"angle":0,"strokeColor":"#c92a2a","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"🚨 Quarantine\ndq_errors table\n\nOwner: ???\nSLA: 4h CRIT","fontSize":12,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
+      // ---- STAGING ----
+      {"id":"stg","type":"rectangle","x":180,"y":516,"width":220,"height":60,"angle":0,"strokeColor":"#2f9e44","backgroundColor":"#ebfbee","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100},
+      {"id":"stgt","type":"text","x":190,"y":528,"width":200,"height":36,"angle":0,"strokeColor":"#2f9e44","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"🔄 Staging\nпрошло DQ, cross-checks","fontSize":12,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
+      // staging → dq2
+      {"id":"a9","type":"arrow","x":290,"y":576,"width":0,"height":40,"angle":0,"strokeColor":"#868e96","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[0,40]]},
+      // ---- DQ ENGINE 2 placeholder ----
+      {"id":"dq2","type":"rectangle","x":180,"y":636,"width":220,"height":56,"angle":0,"strokeColor":"#9775fa","backgroundColor":"#f3f0ff","fillStyle":"solid","strokeWidth":2,"strokeStyle":"dashed","roughness":0,"opacity":100},
+      {"id":"dq2t","type":"text","x":190,"y":648,"width":200,"height":32,"angle":0,"strokeColor":"#7048e8","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"🔍 DQ Engine 2 — ???\ncross-table checks","fontSize":12,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
+      // dq2 → core
+      {"id":"a10","type":"arrow","x":290,"y":692,"width":0,"height":40,"angle":0,"strokeColor":"#2f9e44","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[0,40]]},
+      // ---- CORE ----
+      {"id":"core","type":"rectangle","x":180,"y":752,"width":220,"height":60,"angle":0,"strokeColor":"#1971c2","backgroundColor":"#e7f5ff","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100},
+      {"id":"coret","type":"text","x":190,"y":764,"width":200,"height":36,"angle":0,"strokeColor":"#1971c2","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"✅ Core / DWH\nтолько доверенные данные","fontSize":12,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
+      // core → gate
+      {"id":"a11","type":"arrow","x":290,"y":812,"width":0,"height":44,"angle":0,"strokeColor":"#868e96","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[0,44]]},
+      // ---- AIRFLOW GATE ----
+      {"id":"gate","type":"diamond","x":210,"y":876,"width":160,"height":70,"angle":0,"strokeColor":"#e67700","backgroundColor":"#fff3bf","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100},
+      {"id":"gatet","type":"text","x":215,"y":894,"width":150,"height":34,"angle":0,"strokeColor":"#e67700","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"Airflow\npayroll_gate","fontSize":12,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
+      // gate → payroll (pass)
+      {"id":"a12","type":"arrow","x":290,"y":946,"width":0,"height":44,"angle":0,"strokeColor":"#2f9e44","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[0,44]]},
+      {"id":"a12l","type":"text","x":295,"y":960,"width":80,"height":20,"angle":0,"strokeColor":"#2f9e44","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"Score ≥ 99%","fontSize":11,"fontFamily":1,"textAlign":"left","verticalAlign":"middle"},
+      // gate → alert (fail)
+      {"id":"a13","type":"arrow","x":370,"y":911,"width":120,"height":0,"angle":0,"strokeColor":"#e03131","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[120,0]]},
+      {"id":"a13l","type":"text","x":380,"y":894,"width":110,"height":20,"angle":0,"strokeColor":"#e03131","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"Score < 99% 🔴","fontSize":11,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
+      // ---- ALERT ----
+      {"id":"alert","type":"rectangle","x":510,"y":880,"width":160,"height":60,"angle":0,"strokeColor":"#e03131","backgroundColor":"#fff5f5","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100},
+      {"id":"alertt","type":"text","x":518,"y":896,"width":144,"height":28,"angle":0,"strokeColor":"#c92a2a","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"🔔 Alert\nSlack · PagerDuty","fontSize":12,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
+      // ---- PAYROLL ----
+      {"id":"pay","type":"rectangle","x":180,"y":1010,"width":220,"height":56,"angle":0,"strokeColor":"#2f9e44","backgroundColor":"#ebfbee","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100},
+      {"id":"payt","type":"text","x":190,"y":1022,"width":200,"height":32,"angle":0,"strokeColor":"#2f9e44","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"💰 Payroll · 02:00","fontSize":14,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
+      // core → BI, Compliance
+      {"id":"a14","type":"arrow","x":400,"y":782,"width":120,"height":0,"angle":0,"strokeColor":"#868e96","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[120,0]]},
+      {"id":"bi","type":"rectangle","x":540,"y":752,"width":130,"height":56,"angle":0,"strokeColor":"#6741d9","backgroundColor":"#f3f0ff","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100},
+      {"id":"bit","type":"text","x":548,"y":768,"width":114,"height":24,"angle":0,"strokeColor":"#6741d9","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"📊 HR BI","fontSize":13,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
+      {"id":"a15","type":"arrow","x":400,"y":800,"width":120,"height":40,"angle":0,"strokeColor":"#868e96","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[120,40]]},
+      {"id":"cmp","type":"rectangle","x":540,"y":828,"width":130,"height":56,"angle":0,"strokeColor":"#6741d9","backgroundColor":"#f3f0ff","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100},
+      {"id":"cmpt","type":"text","x":548,"y":844,"width":114,"height":24,"angle":0,"strokeColor":"#6741d9","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"📋 Compliance","fontSize":13,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
+      // ---- MONITORING placeholder ----
+      {"id":"mon","type":"rectangle","x":700,"y":600,"width":160,"height":100,"angle":0,"strokeColor":"#1971c2","backgroundColor":"#e7f5ff","fillStyle":"solid","strokeWidth":2,"strokeStyle":"dashed","roughness":0,"opacity":100},
+      {"id":"mont","type":"text","x":708,"y":616,"width":144,"height":68,"angle":0,"strokeColor":"#1971c2","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"📈 Monitoring\nDQ Score UI\n??? инструмент\nScorecard","fontSize":12,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"}
+    ],
+    "appState": {
+      "viewBackgroundColor": "#ffffff",
+      "gridSize": null,
+      "zoom": {"value": 0.8}
+    }
+  };
+
+  const text = JSON.stringify(schema);
   navigator.clipboard.writeText(text).then(() => {
-    const btn = document.querySelector('.copy-btn');
-    btn.textContent = 'Скопировано ✓';
-    btn.classList.add('copied');
-    setTimeout(() => { btn.textContent = 'Копировать'; btn.classList.remove('copied'); }, 2000);
+    const btn = document.querySelector('.open-btn');
+    btn.textContent = '✅ Скопировано!';
+    btn.style.background = '#2f9e44';
+    document.getElementById('excali-copied').style.display = 'block';
+    setTimeout(() => {
+      btn.textContent = '📋 Скопировать схему';
+      btn.style.background = '';
+    }, 3000);
+  }).catch(() => {
+    // fallback: download as .excalidraw file
+    const blob = new Blob([text], {type: 'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'dq-tobe-schema.excalidraw';
+    a.click();
+    URL.revokeObjectURL(url);
   });
 }
 </script>
