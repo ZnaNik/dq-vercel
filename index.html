@@ -9,500 +9,528 @@
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f4f5f7;color:#172b4d;line-height:1.6}
 .page{max-width:980px;margin:0 auto;padding:24px}
 h1{font-size:24px;font-weight:700;color:#172b4d;margin-bottom:4px}
-h2{font-size:17px;font-weight:700;color:#172b4d;margin:28px 0 12px;border-bottom:2px solid #dfe1e6;padding-bottom:8px}
-h3{font-size:14px;font-weight:700;color:#172b4d;margin:16px 0 8px}
+h2{font-size:17px;font-weight:700;color:#172b4d;margin:24px 0 10px;border-bottom:2px solid #dfe1e6;padding-bottom:6px}
+h3{font-size:14px;font-weight:700;color:#172b4d;margin:14px 0 6px}
 p{margin-bottom:10px;font-size:14px;color:#172b4d}
 ul,ol{padding-left:20px;margin-bottom:12px}
 li{margin-bottom:4px;font-size:14px}
-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px;background:#fff;border-radius:4px;overflow:hidden}
-th{background:#f4f5f7;border:1px solid #dfe1e6;padding:9px 11px;text-align:left;font-weight:700;color:#172b4d;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
-td{border:1px solid #dfe1e6;padding:9px 11px;vertical-align:top}
-code{background:#eef0f4;padding:2px 6px;border-radius:3px;font-family:'SF Mono',Monaco,monospace;font-size:12px;color:#0747a6}
-hr{border:none;border-top:1px solid #dfe1e6;margin:24px 0}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:12px;background:#fff;border-radius:4px;overflow:hidden}
+th{background:#f4f5f7;border:1px solid #dfe1e6;padding:8px 10px;text-align:left;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.03em}
+td{border:1px solid #dfe1e6;padding:8px 10px;vertical-align:top}
+code{background:#eef0f4;padding:2px 5px;border-radius:3px;font-family:'SF Mono',Monaco,monospace;font-size:12px;color:#0747a6}
+hr{border:none;border-top:1px solid #dfe1e6;margin:20px 0}
 
-/* ---- Mode switcher ---- */
+/* Mode switcher */
 .mode-bar{display:flex;background:#fff;border:2px solid #dfe1e6;border-radius:8px;overflow:hidden;width:fit-content}
-.mode-btn{padding:9px 26px;font-size:14px;font-weight:600;cursor:pointer;border:none;background:transparent;color:#5e6c84;transition:all .15s}
+.mode-btn{padding:9px 22px;font-size:14px;font-weight:600;cursor:pointer;border:none;background:transparent;color:#5e6c84;transition:all .15s}
 .mode-btn.active{background:#0052cc;color:#fff}
 .mode-btn:first-child{border-right:1px solid #dfe1e6}
 
-/* ---- Alert boxes ---- */
-.info{background:#e3fcef;border-left:4px solid #36b37e;padding:13px 16px;margin:12px 0;border-radius:0 4px 4px 0;font-size:14px}
+/* Alerts */
+.info{background:#e3fcef;border-left:4px solid #36b37e;padding:12px 14px;margin:12px 0;border-radius:0 4px 4px 0;font-size:14px}
 .info strong{color:#006644}
-.warn{background:#ffebe6;border-left:4px solid #de350b;padding:13px 16px;margin:12px 0;border-radius:0 4px 4px 0;font-size:14px}
+.warn{background:#ffebe6;border-left:4px solid #de350b;padding:12px 14px;margin:12px 0;border-radius:0 4px 4px 0;font-size:14px}
 .warn strong{color:#bf2600}
-.note{background:#fffae6;border-left:4px solid #ffc400;padding:13px 16px;margin:12px 0;border-radius:0 4px 4px 0;font-size:14px}
+.note{background:#fffae6;border-left:4px solid #ffc400;padding:12px 14px;margin:12px 0;border-radius:0 4px 4px 0;font-size:14px}
 .note strong{color:#7f5f01}
 
-/* ---- Cards ---- */
-.card{background:#fff;border:1px solid #dfe1e6;border-radius:6px;padding:20px;margin:14px 0}
+/* Cards */
+.card{background:#fff;border:1px solid #dfe1e6;border-radius:6px;padding:18px;margin:12px 0}
 .card.c-orange{border-left:4px solid #ff8b00}
 .card.c-red{border-left:4px solid #de350b}
 .card.c-green{border-left:4px solid #36b37e}
 .card.c-purple{border-left:4px solid #6554c0}
-.task-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
-.tn{font-size:12px;font-weight:700;padding:3px 14px;border-radius:20px;color:#fff}
-.tn-orange{background:#ff8b00}.tn-red{background:#de350b}.tn-green{background:#36b37e}.tn-purple{background:#6554c0}
-.task-title{font-size:16px;font-weight:700}
-.task-time{margin-left:auto;font-size:12px;background:#f4f5f7;color:#5e6c84;padding:3px 12px;border-radius:20px}
+.card.c-blue{border-left:4px solid #0052cc}
 
-/* ---- Excalidraw open block ---- */
-.excali-box{background:#1e1e2e;border-radius:8px;padding:18px 20px;margin:14px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.excali-box .ex-text{color:#cdd6f4;font-size:13px}
-.excali-box .ex-text strong{color:#a78bfa}
-.open-btn{background:#7c6af7;color:#fff;border:none;border-radius:6px;padding:10px 20px;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;transition:background .15s}
-.open-btn:hover{background:#6c5ce7}
-/* ---- CSS diagram ---- */
-.diag{background:#fff;border:1px solid #dfe1e6;border-radius:8px;padding:20px;margin:12px 0;overflow-x:auto}
-.diag-row{display:flex;align-items:center;gap:0;flex-wrap:nowrap;margin-bottom:8px}
-.diag-sources{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-bottom:4px}
-.db{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;border-radius:6px;padding:8px 12px;font-size:12px;font-weight:600;text-align:center;min-width:100px;min-height:52px;border:2px solid;line-height:1.3}
-.db-src{background:#f8faff;border-color:#b3c6ff;color:#0052cc}
-.db-kafka{background:#fff8e1;border-color:#f59e0b;color:#92400e;border-radius:20px}
+/* Accordion tasks */
+.task-header{display:flex;align-items:center;gap:10px;padding:14px 16px;background:#f8f9fa;border:1px solid #dfe1e6;border-radius:6px 6px 0 0;cursor:pointer;transition:background .15s}
+.task-header:hover{background:#f0f4ff}
+.task-header.closed{border-radius:6px}
+.task-header .tn{font-size:11px;font-weight:700;padding:2px 10px;border-radius:12px;color:#fff;flex-shrink:0}
+.tn-orange{background:#ff8b00}.tn-red{background:#de350b}.tn-green{background:#36b37e}.tn-purple{background:#6554c0}.tn-blue{background:#0052cc}
+.task-title{font-size:15px;font-weight:700;flex:1}
+.task-time{font-size:12px;background:#fff;color:#5e6c84;padding:2px 10px;border-radius:12px;border:1px solid #dfe1e6}
+.task-chevron{font-size:14px;color:#5e6c84;transition:transform .2s}
+.task-header.open .task-chevron{transform:rotate(180deg)}
+.task-body{display:none;padding:16px;border:1px solid #dfe1e6;border-top:none;border-radius:0 0 6px 6px;background:#fff;margin-bottom:12px}
+.task-body.open{display:block}
+
+/* Password modal */
+.pw-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:1000}
+.pw-overlay.show{display:flex}
+.pw-box{background:#fff;padding:24px;border-radius:8px;max-width:320px;width:90%}
+.pw-title{font-size:16px;font-weight:700;margin-bottom:12px}
+.pw-input{width:100%;padding:10px 12px;border:2px solid #dfe1e6;border-radius:6px;font-size:16px;margin-bottom:12px}
+.pw-input:focus{outline:none;border-color:#0052cc}
+.pw-btn{background:#0052cc;color:#fff;border:none;padding:10px 20px;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;width:100%}
+.pw-btn:hover{background:#0047b3}
+.pw-error{color:#de350b;font-size:13px;margin-top:8px;display:none}
+
+/* CSS diagram */
+.diag{background:#fff;border:1px solid #dfe1e6;border-radius:8px;padding:16px;margin:10px 0;overflow-x:auto}
+.diag-title{font-size:11px;font-weight:700;color:#5e6c84;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.db{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;border-radius:6px;padding:7px 10px;font-size:12px;font-weight:600;text-align:center;min-width:90px;min-height:48px;border:2px solid;line-height:1.3}
+.db-src{background:#e7f5ff;border-color:#1971c2;color:#1971c2}
+.db-kafka{background:#fff3bf;border-color:#f59e0b;color:#e67700;border-radius:20px}
 .db-dwh{background:#ffebe6;border-color:#de350b;color:#bf2600}
 .db-airflow{background:#e3f2fd;border-color:#1976d2;color:#1565c0}
 .db-consumer{background:#f3f0ff;border-color:#6554c0;color:#403294}
-.db-payroll{background:#e3fcef;border-color:#36b37e;color:#006644}
-.arrow{font-size:20px;color:#5e6c84;margin:0 6px;flex-shrink:0}
-.arrow-down{text-align:center;font-size:18px;color:#5e6c84;margin:2px 0}
-.diag-label{font-size:11px;color:#5e6c84;margin-top:3px;font-weight:400}
-.diag-section{margin-bottom:12px}
-.diag-title{font-size:11px;font-weight:700;color:#5e6c84;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.db-payroll{background:#ebfbee;border-color:#36b37e;color:#006644}
+.arrow{font-size:18px;color:#5e6c84;margin:0 4px}
+.arrow-down{text-align:center;font-size:16px;color:#5e6c84;margin:2px 0}
+.diag-label{font-size:10px;color:#5e6c84;margin-top:2px;font-weight:400}
+.diag-section{margin-bottom:10px}
 
-/* ---- Interviewer panels ---- */
-.iv-panel{background:#f0f4ff;border:2px solid #b3c6ff;border-radius:6px;padding:16px 20px;margin:14px 0}
-.iv-lbl{font-size:11px;font-weight:700;color:#0052cc;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}
-.q-row{border-left:3px solid #0052cc;padding:10px 14px;margin:8px 0;background:#fff;border-radius:0 4px 4px 0}
-.q-row .q{font-size:14px;font-weight:600;color:#172b4d;margin-bottom:5px}
-.q-row .ok{font-size:13px;color:#006644;margin-bottom:2px}
-.q-row .bad{font-size:13px;color:#bf2600}
-.flag-ok{background:#f0fff4;border-left:3px solid #36b37e;padding:8px 12px;margin:6px 0;font-size:13px;border-radius:0 3px 3px 0}
-.flag-bad{background:#fff0f0;border-left:3px solid #de350b;padding:8px 12px;margin:6px 0;font-size:13px;border-radius:0 3px 3px 0}
+/* Excalidraw */
+.excali-box{background:#1e1e2e;border-radius:8px;padding:16px 18px;margin:12px 0;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.excali-box .ex-text{color:#cdd6f4;font-size:13px}
+.excali-box .ex-text strong{color:#a78bfa}
+.open-btn{background:#7c6af7;color:#fff;border:none;border-radius:6px;padding:10px 18px;font-size:13px;font-weight:700;cursor:pointer;transition:background .15s}
+.open-btn:hover{background:#6c5ce7}
 
-/* ---- Badges ---- */
-.dim{display:inline-block;padding:2px 7px;border-radius:10px;font-size:11px;font-weight:700;margin:1px}
+/* Interviewer panels */
+.iv-only{display:none}
+body.mode-iv .iv-only{display:block}
+body.mode-cand .iv-only{display:none}
+.iv-panel{background:#f0f4ff;border:2px solid #b3c6ff;border-radius:6px;padding:14px 18px;margin:12px 0}
+.iv-lbl{font-size:11px;font-weight:700;color:#0052cc;text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px}
+.q-row{border-left:3px solid #0052cc;padding:8px 12px;margin:6px 0;background:#fff;border-radius:0 4px 4px 0;font-size:13px}
+.q-row .q{font-weight:600;margin-bottom:3px}
+.q-row .ok{color:#006644}
+.q-row .bad{color:#bf2600}
+.flag-ok{background:#f0fff4;border-left:3px solid #36b37e;padding:6px 10px;margin:4px 0;font-size:12px;border-radius:0 3px 3px 0}
+.flag-bad{background:#fff0f0;border-left:3px solid #de350b;padding:6px 10px;margin:4px 0;font-size:12px;border-radius:0 3px 3px 0}
+
+/* Score badges */
+.dim{display:inline-block;padding:2px 6px;border-radius:8px;font-size:10px;font-weight:700;margin:1px}
 .d-com{background:#e3fcef;color:#006644}
 .d-acc{background:#deebff;color:#0747a6}
 .d-val{background:#fffae6;color:#7f5f01}
 .d-uniq{background:#ffebe6;color:#bf2600}
 .d-cons{background:#f3f0ff;color:#403294}
+.d-time{background:#e6fcff;color:#006699}
 
-/* ---- Verdict ---- */
-.verdict-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:14px 0}
-@media(max-width:700px){.verdict-row{grid-template-columns:1fr}}
-.vc{border-radius:6px;padding:16px;text-align:center;border:2px solid}
-.vc.g{background:#e3fcef;border-color:#36b37e}.vc.g .vs{color:#006644}
-.vc.y{background:#fffae6;border-color:#ffc400}.vc.y .vs{color:#7f5f01}
-.vc.r{background:#ffebe6;border-color:#de350b}.vc.r .vs{color:#bf2600}
-.vs{font-size:22px;font-weight:700;margin-bottom:4px}
-.vl{font-size:13px;font-weight:700;margin-bottom:4px}
-.vd{font-size:12px;color:#5e6c84}
-
-/* ---- Timeline ---- */
-.tl{display:flex;border:1px solid #dfe1e6;border-radius:6px;overflow:hidden;margin:14px 0;background:#fff}
-.tl-b{flex:1;padding:10px 8px;text-align:center;border-right:1px solid #dfe1e6;font-size:12px}
+/* Timeline */
+.tl{display:flex;border:1px solid #dfe1e6;border-radius:6px;overflow:hidden;margin:12px 0;background:#fff}
+.tl-b{flex:1;padding:8px 6px;text-align:center;border-right:1px solid #dfe1e6;font-size:11px}
 .tl-b:last-child{border-right:none}
-.tl-b .tt{font-weight:700;font-size:13px;color:#172b4d}
-.tl-b .tl{color:#5e6c84;font-size:11px;margin-top:2px;border:none}
+.tl-b .tt{font-weight:700;font-size:12px;color:#172b4d}
+.tl-b .tl{color:#5e6c84;font-size:10px;margin-top:2px}
 
-/* ---- Mode visibility ---- */
-.iv-only{display:none}
-body.mode-iv .iv-only{display:block}
-body.mode-cand .iv-only{display:none}
+/* Tables grid */
+.tables-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:700px){.tables-grid{grid-template-columns:1fr}}
+.table-card{background:#fff;border:1px solid #dfe1e6;border-radius:6px;padding:12px}
+.table-card h4{font-size:13px;font-weight:700;margin-bottom:8px;color:#172b4d}
+.table-card .src-tag{font-size:10px;background:#e7f5ff;color:#1971c2;padding:2px 8px;border-radius:10px;margin-left:8px}
 </style>
 </head>
 <body class="mode-cand">
 <div class="page">
 
-<!-- ===== HEADER ===== -->
-<div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px">
+<!-- Password Modal -->
+<div class="pw-overlay" id="pwModal">
+  <div class="pw-box">
+    <div class="pw-title">🔐 Доступ для интервьюера</div>
+    <p style="font-size:13px;color:#5e6c84;margin-bottom:12px">Введите код доступа:</p>
+    <input type="password" class="pw-input" id="pwInput" placeholder="••••">
+    <button class="pw-btn" onclick="checkPassword()">Войти</button>
+    <div class="pw-error" id="pwError">Неверный код</div>
+  </div>
+</div>
+
+<!-- Header -->
+<div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px">
   <div>
     <h1>Senior DQ Engineer — Практический кейс</h1>
-    <p style="color:#5e6c84;font-size:13px;margin-top:4px">HR-домен · 90 минут · Проектирование в Excalidraw</p>
+    <p style="color:#5e6c84;font-size:13px;margin-top:4px">HR-домен · 60 минут · Поэтапное открытие заданий</p>
   </div>
   <div class="mode-bar">
-    <button class="mode-btn active" id="btn-cand" onclick="setMode('cand')">👤 Кандидат</button>
-    <button class="mode-btn" id="btn-iv" onclick="setMode('iv')">🎙 Интервьюер</button>
+    <button class="mode-btn active" id="btn-cand" onclick="switchMode('cand')">👤 Кандидат</button>
+    <button class="mode-btn" id="btn-iv" onclick="switchMode('iv')">🎙 Интервьюер</button>
   </div>
 </div>
 
 <div class="iv-only">
-  <div class="info"><strong>Режим интервьюера.</strong> Кандидат видит только задания. Здесь видны эталоны, скрипты вопросов и оценочный лист. Каждая подсказка с вашей стороны — снижает оценку за блок на уровень. Фиксируйте количество подсказок.</div>
+  <div class="info"><strong>Режим интервьюера.</strong> Кандидат видит задания поэтапно — сам решает когда открыть следующее. Каждая подсказка от вас снижает оценку. Фиксируйте.</div>
 </div>
 
-<!-- ===== TIMELINE ===== -->
+<!-- Timeline -->
 <div class="tl">
-  <div class="tl-b"><div class="tt">0–10 мин</div><div class="tl" style="color:#5e6c84;font-size:11px">Брифинг</div></div>
-  <div class="tl-b"><div class="tt">10–25 мин</div><div class="tl" style="color:#ff8b00;font-size:11px">T1: Диагностика</div></div>
-  <div class="tl-b"><div class="tt">25–60 мин</div><div class="tl" style="color:#de350b;font-size:11px">T2: Архитектура</div></div>
-  <div class="tl-b"><div class="tt">60–75 мин</div><div class="tl" style="color:#36b37e;font-size:11px">T3: DQ Score</div></div>
-  <div class="tl-b"><div class="tt">75–90 мин</div><div class="tl" style="color:#6554c0;font-size:11px">T4: Инцидент</div></div>
+  <div class="tl-b"><div class="tt">0–5</div><div class="tl">Брифинг</div></div>
+  <div class="tl-b"><div class="tt" style="color:#ff8b00">5–15</div><div class="tl">T1: Диагностика</div></div>
+  <div class="tl-b"><div class="tt" style="color:#de350b">15–35</div><div class="tl">T2: Архитектура</div></div>
+  <div class="tl-b"><div class="tt" style="color:#0052cc">35–45</div><div class="tl">T3: Data Contract</div></div>
+  <div class="tl-b"><div class="tt" style="color:#36b37e">45–55</div><div class="tl">T4: Инцидент</div></div>
+  <div class="tl-b"><div class="tt" style="color:#6554c0">55–60</div><div class="tl">Вопросы</div></div>
 </div>
 
-<!-- ===== CONTEXT ===== -->
-<h2>Контекст</h2>
-
-<p>Крупный ритейлер, 8 000 сотрудников. Данные о персонале собираются из четырёх систем и попадают в корпоративное HR-хранилище. Downstream-потребители: <strong>Payroll</strong> (расчёт зарплат каждую ночь в 02:00), <strong>HR BI</strong>, <strong>Compliance</strong> (отчётность в ФНС и ПФР).</p>
+<!-- Context -->
+<h2>🎯 Ситуация</h2>
+<p>Крупный ритейлер, 8 000 сотрудников. Данные о персонале собираются из 4 систем в HR DWH. Потребители: Payroll (02:00), HR BI, Compliance (ФНС, ПФР).</p>
 
 <div class="warn">
-  <strong>Что случилось:</strong> Регулятор прислал замечание — задвоенные выплаты у 17 сотрудников, 4 сотрудника без трудовых договоров в отчёте. Финансовые потери ~4,2 млн ₽ за полгода. Команда не может локализовать проблему — нет ни одной DQ-проверки, нет мониторинга.
+  <strong>Инцидент:</strong> Регулятор прислал замечание — задвоенные выплаты у 17 сотрудников, 4 сотрудника без договоров в отчёте. Потери ~4,2 млн ₽. Нет DQ-проверок, нет мониторинга, нет понимания откуда грязные данные.
 </div>
 
-<h3>Текущая архитектура (AS-IS)</h3>
-<p>Данные из источников идут через Kafka напрямую в одну общую таблицу DWH. Airflow запускает пайплайны по расписанию, но DQ-шагов внутри нет:</p>
-
+<h3>Текущая архитектура</h3>
 <div class="diag">
   <div class="diag-section">
-    <div class="diag-title">Источники данных</div>
-    <div class="diag-sources">
-      <div class="db db-src">1С:ЗУП<div class="diag-label">CDC · каждый час</div></div>
-      <div class="db db-src">1С:ДО<div class="diag-label">CDC · раз в сутки</div></div>
-      <div class="db db-src">HRM SaaS<div class="diag-label">REST API</div></div>
-      <div class="db db-src">Legacy CSV<div class="diag-label">batch · раз в неделю</div></div>
+    <div class="diag-title">Источники</div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
+      <div class="db db-src">1С:ЗУП<span class="diag-label">CDC · 1ч</span></div>
+      <div class="db db-src">1С:ДО<span class="diag-label">CDC · 1 сутки</span></div>
+      <div class="db db-src">HRM SaaS<span class="diag-label">API</span></div>
+      <div class="db db-src">Legacy CSV<span class="diag-label">batch · неделя</span></div>
     </div>
     <div class="arrow-down">↓ ↓ ↓ ↓</div>
   </div>
-
-  <div class="diag-section" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-    <div>
-      <div class="db db-kafka" style="min-width:120px">🟡 Kafka<div class="diag-label">очередь событий</div></div>
-    </div>
+  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+    <div class="db db-kafka">⚡ Kafka</div>
     <div class="arrow">→</div>
-    <div style="flex:1">
-      <div class="db db-dwh" style="width:100%;min-width:180px">
-        ⚠️ HR DWH
-        <div class="diag-label" style="color:#bf2600">нет слоёв · нет DQ-проверок · всё вместе</div>
-      </div>
-    </div>
+    <div class="db db-dwh" style="flex:1;min-width:140px">⚠️ HR DWH<br><span class="diag-label">нет слоёв · нет проверок</span></div>
     <div style="display:flex;flex-direction:column;gap:4px">
-      <div class="db db-airflow" style="min-width:110px">Airflow<div class="diag-label">только расписание</div></div>
-    </div>
-  </div>
-
-  <div class="arrow-down">↓</div>
-
-  <div class="diag-section">
-    <div class="diag-title">Потребители (получают данные как есть)</div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap">
-      <div class="db db-payroll">💰 Payroll<div class="diag-label">02:00 каждую ночь</div></div>
-      <div class="db db-consumer">📊 HR BI<div class="diag-label">дашборды</div></div>
-      <div class="db db-consumer">📋 Compliance<div class="diag-label">ФНС · ПФР</div></div>
+      <div class="db db-payroll">💰 Payroll<span class="diag-label">02:00</span></div>
+      <div class="db db-consumer">📊 BI / Compliance</div>
     </div>
   </div>
 </div>
 
-<table>
-  <tr><th>Источник</th><th>Метод</th><th>Частота</th><th>Что передаёт</th></tr>
-  <tr><td>1С:ЗУП</td><td>CDC (Debezium)</td><td>Каждый час</td><td>Приказы, оклады, ставки</td></tr>
-  <tr><td>1С:ДО</td><td>CDC</td><td>Раз в сутки</td><td>Договоры, доп. соглашения</td></tr>
-  <tr><td>HRM SaaS</td><td>REST API</td><td>Real-time</td><td>Профили, должности, орг. структура</td></tr>
-  <tr><td>Legacy CSV</td><td>Batch-файл</td><td>Раз в неделю</td><td>Исторические данные до 2019 г.</td></tr>
-</table>
-
-<!-- ===== DATA ===== -->
-<h2>Данные — что реально приходит в DWH</h2>
-<p>Ниже — реальные записи из двух таблиц. Проверок нет, данные попадают в Payroll как есть.</p>
-
-<h3>employee_profile</h3>
-<table>
-  <tr><th>emp_id</th><th>full_name</th><th>doc_number</th><th>bank_account</th><th>hire_date</th><th>dept_code</th></tr>
-  <tr><td>E-1001</td><td>Иванов А.С.</td><td>4512 345678</td><td>40817810012345678901</td><td>2021-03-15</td><td>D-05</td></tr>
-  <tr><td>E-1002</td><td>—</td><td>45AB INVALID</td><td>40817810098765432100</td><td>2022-07-01</td><td>D-12</td></tr>
-  <tr><td>E-1003</td><td>Петров К.Н.</td><td>7701 112233</td><td>408178100123456</td><td>2020-11-30</td><td>D-05</td></tr>
-  <tr><td>E-1003</td><td>Петров К.Н.</td><td>7701 112233</td><td>408178100123456</td><td>2020-11-30</td><td>D-05</td></tr>
-  <tr><td>E-1004</td><td>Сидорова М.Р.</td><td>9900 667788</td><td>40817810011112222333</td><td>2035-01-01</td><td>D-99</td></tr>
-  <tr><td>E-1005</td><td>Козлов Д.В.</td><td>5511 445566</td><td>40817810055556666777</td><td>2019-05-20</td><td>D-05</td></tr>
-</table>
-
-<h3>employment_record</h3>
-<table>
-  <tr><th>emp_id</th><th>job_title</th><th>salary_amount</th><th>contract_type</th><th>vacation_days</th><th>is_fixed_term</th></tr>
-  <tr><td>E-1001</td><td>Аналитик</td><td>95 000</td><td>permanent</td><td>28</td><td>false</td></tr>
-  <tr><td>E-1002</td><td>—</td><td>0</td><td>permanent</td><td>28</td><td>false</td></tr>
-  <tr><td>E-1003</td><td>Менеджер</td><td>-5 000</td><td>fixed</td><td>28</td><td>true</td></tr>
-  <tr><td>E-1006</td><td>Инженер</td><td>110 000</td><td>permanent</td><td>28</td><td>false</td></tr>
-  <tr><td>E-1004</td><td>Директор</td><td>250 000</td><td>permanent</td><td>28</td><td>false</td></tr>
-</table>
-
-<!-- ===== TASKS ===== -->
-<h2>Задания</h2>
-
-<!-- ---- T1 ---- -->
-<div class="card c-orange">
-  <div class="task-head">
+<!-- TASK 1 -->
+<div class="card c-orange" style="padding:0;border:none;background:transparent">
+  <div class="task-header closed" onclick="toggleTask('t1')">
     <span class="tn tn-orange">T1</span>
-    <span class="task-title">Диагностика данных</span>
-    <span class="task-time">⏱ 15 мин</span>
+    <span class="task-title">Диагностика — найдите проблемы в данных</span>
+    <span class="task-time">⏱ 10 мин</span>
+    <span class="task-chevron">▼</span>
   </div>
-  <p>Посмотрите на данные выше и расскажите вслух: <strong>что здесь не так?</strong> Для каждой проблемы — по какому параметру качества она классифицируется и какой бизнес-риск несёт. В конце — предложите правила, которые вы бы поставили для этого домена.</p>
-  <div class="note"><strong>Формат:</strong> устный спич, не таблица. Говорите так, как объясняете команде на стендапе.</div>
+  <div class="task-body" id="t1">
+    <p>Ниже — выгрузки из 4 источников + историчная таблица. Найдите минимум <strong>8 проблем</strong> разных типов. Для каждой: какое <strong>DQ-измерение</strong> и какой <strong>бизнес-риск</strong>.</p>
+    <div class="note"><strong>Формат:</strong> устный спич. Не таблица — рассказывайте как на стендапе.</div>
 
-  <div class="iv-only">
-    <div class="iv-panel">
-      <div class="iv-lbl">🔒 Эталон — что должен найти Senior (минимум 5 из 6)</div>
+    <h3>📋 Таблицы с данными</h3>
+    <div class="tables-grid">
+      <!-- Table 1 -->
+      <div class="table-card">
+        <h4>employees_zup<span class="src-tag">1С:ЗУП</span></h4>
+        <table>
+          <tr><th>emp_id</th><th>fio</th><th>salary</th><th>dept</th><th>hire_date</th></tr>
+          <tr><td>E001</td><td>Иванов А.С.</td><td>95000</td><td>SALES</td><td>2021-03-15</td></tr>
+          <tr><td>E002</td><td>—</td><td>0</td><td>SALES</td><td>2022-07-01</td></tr>
+          <tr><td>E003</td><td>Петров К.Н.</td><td>-5000</td><td>SALES</td><td>2020-11-30</td></tr>
+          <tr><td>E003</td><td>Петров К.Н.</td><td>85000</td><td>HR</td><td>2020-11-30</td></tr>
+          <tr><td>E004</td><td>Сидорова М.</td><td>120000</td><td>XYZ99</td><td>2035-01-01</td></tr>
+        </table>
+      </div>
+      <!-- Table 2 -->
+      <div class="table-card">
+        <h4>contracts_do<span class="src-tag">1С:ДО</span></h4>
+        <table>
+          <tr><th>emp_id</th><th>contract_num</th><th>start_date</th><th>end_date</th><th>type</th></tr>
+          <tr><td>E001</td><td>CTR-2021-001</td><td>2021-03-15</td><td>null</td><td>permanent</td></tr>
+          <tr><td>E002</td><td>CTR-2022-045</td><td>2022-07-01</td><td>2023-06-30</td><td>fixed</td></tr>
+          <tr><td>E005</td><td>CTR-2020-112</td><td>2020-09-01</td><td>null</td><td>permanent</td></tr>
+          <tr><td>E006</td><td>null</td><td>2019-05-20</td><td>null</td><td>permanent</td></tr>
+          <tr><td>E999</td><td>CTR-2023-999</td><td>2023-01-01</td><td>null</td><td>permanent</td></tr>
+        </table>
+      </div>
+      <!-- Table 3 -->
+      <div class="table-card">
+        <h4>profiles_hrm<span class="src-tag">HRM SaaS</span></h4>
+        <table>
+          <tr><th>emp_id</th><th>email</th><th>phone</th><th>manager_id</th><th>status</th></tr>
+          <tr><td>E001</td><td>ivanov@company.ru</td><td>+79991234567</td><td>E100</td><td>active</td></tr>
+          <tr><td>E003</td><td>petrov@company.ru</td><td>+7(999)123-45-67</td><td>E100</td><td>active</td></tr>
+          <tr><td>E004</td><td>sidorova@company.ru</td><td>+79999876543</td><td>E999</td><td>active</td></tr>
+          <tr><td>E005</td><td>NOT_AN_EMAIL</td><td>null</td><td>E100</td><td>active</td></tr>
+          <tr><td>E007</td><td>novikov@company.ru</td><td>+79991112233</td><td>E007</td><td>active</td></tr>
+        </table>
+      </div>
+      <!-- Table 4 -->
+      <div class="table-card">
+        <h4>payroll_legacy<span class="src-tag">Legacy CSV</span></h4>
+        <table>
+          <tr><th>emp_id</th><th>bank_account</th><th>last_payroll</th><th>amount</th><th>currency</th></tr>
+          <tr><td>E001</td><td>40817810012345678901</td><td>2024-01-15</td><td>95000</td><td>RUB</td></tr>
+          <tr><td>E002</td><td>408178100123456</td><td>2024-01-15</td><td>0</td><td>RUB</td></tr>
+          <tr><td>E003</td><td>40817810099988877766</td><td>2024-01-15</td><td>95000</td><td>RUB</td></tr>
+          <tr><td>E008</td><td>40817810011122233344</td><td>2023-06-15</td><td>45000</td><td>USD</td></tr>
+          <tr><td>E009</td><td>null</td><td>2024-01-15</td><td>78000</td><td>RUB</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- History table -->
+    <h3 style="margin-top:16px">📜 История изменений (SCD Type 2) — employee_history</h3>
+    <div class="table-card" style="margin-top:8px">
       <table>
-        <tr><th>Запись</th><th>Проблема</th><th>DQ-измерение</th><th>Бизнес-риск</th></tr>
-        <tr><td>E-1002</td><td>ФИО пустое, doc_number — невалидный формат, salary = 0</td><td><span class="dim d-com">Completeness</span> <span class="dim d-val">Validity</span></td><td>Payroll начислит 0 ₽ → жалоба в ГИТ</td></tr>
-        <tr><td>E-1003 (×2)</td><td>emp_id дублируется — нарушение PK</td><td><span class="dim d-uniq">Uniqueness</span></td><td>Двойное начисление → замечание ФНС</td></tr>
-        <tr><td>E-1003 bank</td><td>bank_account = 15 цифр вместо 20</td><td><span class="dim d-acc">Accuracy</span></td><td>Перевод вернётся — сотрудник не получит деньги</td></tr>
-        <tr><td>E-1003 salary</td><td>salary = −5 000; is_fixed_term=true, vacation_days=28 (ТК: макс 14)</td><td><span class="dim d-val">Validity</span></td><td>Отрицательный расчёт + нарушение ТК РФ</td></tr>
-        <tr><td>E-1004</td><td>hire_date = 2035 (будущее); dept_code D-99 не существует</td><td><span class="dim d-acc">Accuracy</span> <span class="dim d-cons">Consistency</span></td><td>Фантомный отдел в BI, кривая орг. структура</td></tr>
-        <tr><td>E-1006</td><td>Есть в employment_record, нет в employee_profile — orphan record</td><td><span class="dim d-cons">Consistency</span></td><td>Сотрудник без договора в Compliance → штраф регулятора</td></tr>
+        <tr><th>emp_id</th><th>salary</th><th>dept</th><th>valid_from</th><th>valid_to</th><th>is_current</th></tr>
+        <tr><td>E001</td><td>85000</td><td>SALES</td><td>2021-03-15</td><td>2023-12-31</td><td>false</td></tr>
+        <tr><td>E001</td><td>95000</td><td>SALES</td><td>2024-01-01</td><td>9999-12-31</td><td>true</td></tr>
+        <tr><td>E003</td><td>70000</td><td>HR</td><td>2020-11-30</td><td>2023-06-30</td><td>false</td></tr>
+        <tr><td>E003</td><td>85000</td><td>SALES</td><td>2023-07-01</td><td>2023-12-31</td><td>false</td></tr>
+        <tr><td>E003</td><td>85000</td><td>HR</td><td>2024-01-01</td><td>9999-12-31</td><td>true</td></tr>
+        <tr><td>E010</td><td>60000</td><td>IT</td><td>2022-01-01</td><td>2023-12-31</td><td>false</td></tr>
+        <tr><td>E010</td><td>60000</td><td>IT</td><td>2024-01-01</td><td>9999-12-31</td><td>true</td></tr>
       </table>
-      <p style="margin-top:10px"><strong>Должен сам предложить правила:</strong> salary &gt; 0, emp_id уникален, bank_account = 20 цифр, hire_date ≤ today(), referential integrity между таблицами.</p>
-      <div class="q-row">
-        <div class="q">Подсказка если молчит &gt;2 мин: «Посмотрите на E-1003 — что замечаете?»</div>
-        <div class="ok">Доп. вопрос: «Какое из нарушений устраните первым и почему?» — проверяет приоритизацию по бизнес-риску</div>
+    </div>
+
+    <div class="iv-only">
+      <div class="iv-panel">
+        <div class="iv-lbl">🔒 Эталон — 10 проблем (Senior должен найти 8+)</div>
+        <table style="font-size:11px">
+          <tr><th>Таблица</th><th>Проблема</th><th>Измерение</th><th>Риск</th></tr>
+          <tr><td>employees_zup</td><td>E002: пустое ФИО, salary=0</td><td><span class="dim d-com">Completeness</span></td><td>Невозможно идентифицировать для выплаты</td></tr>
+          <tr><td>employees_zup</td><td>E003: дубль emp_id, разные dept/salary</td><td><span class="dim d-uniq">Uniqueness</span></td><td>Двойное начисление, неконсистентность</td></tr>
+          <tr><td>employees_zup</td><td>E003: salary=-5000</td><td><span class="dim d-val">Validity</span></td><td>Отрицательная выплата, бухгалтерский сбой</td></tr>
+          <tr><td>employees_zup</td><td>E004: dept=XYZ99 (нет в справочнике)</td><td><span class="dim d-cons">Consistency</span></td><td>Фантомный отдел в отчётах</td></tr>
+          <tr><td>employees_zup</td><td>E004: hire_date=2035 (будущее)</td><td><span class="dim d-acc">Accuracy</span></td><td>Некорректная аналитика по стажу</td></tr>
+          <tr><td>contracts_do</td><td>E002: end_date &lt; today() для fixed</td><td><span class="dim d-time">Timeliness</span></td><td>Просроченный договор, правовой риск</td></tr>
+          <tr><td>contracts_do</td><td>E006: нет contract_num</td><td><span class="dim d-com">Completeness</span></td><td>Нет документа для Compliance</td></tr>
+          <tr><td>contracts_do</td><td>E999: нет в employees_zup</td><td><span class="dim d-cons">Consistency</span> (orphan)</td><td>Договор без сотрудника, сирота</td></tr>
+          <tr><td>profiles_hrm</td><td>E005: email=NOT_AN_EMAIL</td><td><span class="dim d-val">Validity</span></td><td>Невозможно отправить уведомление</td></tr>
+          <tr><td>profiles_hrm</td><td>E007: manager_id=E007 (сам себе)</td><td><span class="dim d-cons">Consistency</span></td><td>Организационная петля</td></tr>
+          <tr><td>payroll_legacy</td><td>E002: bank_account 15 цифр (нужно 20)</td><td><span class="dim d-acc">Accuracy</span></td><td>Перевод не пройдёт</td></tr>
+          <tr><td>payroll_legacy</td><td>E008: currency=USD (не RUB)</td><td><span class="dim d-cons">Consistency</span></td><td>Валютная ошибка в рублёвом payroll</td></tr>
+          <tr><td>payroll_legacy</td><td>E009: bank_account=null</td><td><span class="dim d-com">Completeness</span></td><td>Некуда перевести зарплату</td></tr>
+          <tr><td>employee_history</td><td>E003: две записи с is_current=true</td><td><span class="dim d-uniq">Uniqueness</span> (SCD)</td><td>Некорректная история, неясность при аудите</td></tr>
+        </table>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ---- T2 ---- -->
-<div class="card c-red">
-  <div class="task-head">
+<!-- TASK 2 -->
+<div class="card c-red" style="padding:0;border:none;background:transparent">
+  <div class="task-header closed" onclick="toggleTask('t2')">
     <span class="tn tn-red">T2</span>
-    <span class="task-title">Спроектируйте DQ-систему — схема TO-BE</span>
-    <span class="task-time">⏱ 35 мин</span>
+    <span class="task-title">Архитектура — спроектируйте TO-BE</span>
+    <span class="task-time">⏱ 20 мин</span>
+    <span class="task-chevron">▼</span>
   </div>
-  <p>Текущая система — одна таблица без проверок. Ваша задача: спроектировать <strong>целевую архитектуру</strong> с полноценным контролем качества данных.</p>
-  <p>Нарисуйте схему в Excalidraw и объясняйте по ходу. Схема должна отвечать на вопросы:</p>
-  <ul>
-    <li>Как организован поток данных от источников до Payroll?</li>
-    <li>Где и как расставлены DQ-проверки?</li>
-    <li>Что происходит с данными, которые не прошли проверку?</li>
-    <li>Как Payroll получает сигнал, что данные сегодня достаточно качественные?</li>
-    <li>Как команда видит состояние качества в реальном времени?</li>
-  </ul>
+  <div class="task-body" id="t2">
+    <p>Спроектируйте <strong>целевую архитектуру</strong> с полноценным DQ. Схема должна включать:</p>
+    <ul>
+      <li>Слои данных (RAW → Staging → Core) с обоснованием</li>
+      <li>Где и какие DQ-проверки (инструменты?)</li>
+      <li>Карантин и его owner</li>
+      <li>Airflow gate перед Payroll</li>
+      <li>Мониторинг качества</li>
+    </ul>
 
-  <div class="note">
-    <strong>Инструкция:</strong> Откройте <a href="https://excalidraw.com" target="_blank" style="color:#7f5f01">excalidraw.com</a>, нарисуйте схему с нуля. Ниже — блоки AS-IS которые можно скопировать как отправную точку.
-  </div>
-
-  <div class="excali-box">
-    <div class="ex-text">
-      <strong>✏ Стартовая схема TO-BE в Excalidraw</strong><br>
-      Нажмите кнопку — схема скопируется в буфер. Откройте Excalidraw и нажмите <strong>Ctrl+V / Cmd+V</strong> — блоки вставятся сразу.
+    <div class="excali-box">
+      <div class="ex-text">
+        <strong>✏ Готовая схема в Excalidraw</strong><br>
+        Нажмите — скопируется JSON. Откройте excalidraw.com и нажмите <strong>Cmd+V</strong>.
+      </div>
+      <button class="open-btn" onclick="copyExcalidrawJSON()">📋 Скопировать схему</button>
     </div>
-    <button class="open-btn" onclick="copyExcalidrawJSON()">📋 Скопировать схему</button>
-  </div>
-  <div id="excali-copied" style="display:none" class="info" style="margin-top:0">✅ Схема скопирована! Откройте <a href="https://excalidraw.com" target="_blank">excalidraw.com</a> и нажмите Cmd+V (Mac) или Ctrl+V (Win).</div>
-  <div class="note" style="margin-top:0"><strong>Что дорисовать:</strong> DQ-инструменты между слоями (Soda? dbt? GE?), Airflow gate перед Payroll, кто Owner карантина, мониторинг качества. Объясняйте каждый блок вслух по ходу рисования.</div>
+    <div id="excali-copied" style="display:none" class="info">✅ Скопировано! Откройте <a href="https://excalidraw.com" target="_blank">excalidraw.com</a> → Cmd+V.</div>
 
-  <div class="iv-only">
-    <div class="iv-panel">
-      <div class="iv-lbl">🔒 Эталон TO-BE + скрипт вопросов</div>
-      <p><strong>Что должен нарисовать и объяснить:</strong></p>
-      <ul>
-        <li><strong>RAW → Staging → Core</strong> — три слоя, каждый с обоснованием зачем. RAW иммутабелен — можно перечитать если нашли баг в правилах.</li>
-        <li><strong>Write-Audit-Publish</strong> — паттерн. Маркер Senior: называет сам, без подсказки.</li>
-        <li><strong>DQ Engine:</strong> Soda Core / dbt tests — конкретные инструменты. Senior называет 2+ и объясняет разницу.</li>
-        <li><strong>Карантин:</strong> отдельная схема, таблица dq_errors. Owner — Data Steward. SLA: 4ч CRITICAL / 24ч WARN.</li>
-        <li><strong>Airflow payroll_gate:</strong> таск перед Payroll, блокирует если DQ Score ниже порога.</li>
-        <li><strong>OpenMetadata:</strong> каталог + UI для DQ Score + Data Contracts. Маркер Senior: называет сам.</li>
-        <li><strong>Data Contract с 1С:ЗУП:</strong> формальное соглашение о формате данных.</li>
-      </ul>
-      <div class="q-row">
-        <div class="q">«Зачем три слоя — RAW, Staging, Core? Почему нельзя проверять прямо в DWH?»</div>
-        <div class="ok">✅ RAW иммутабелен — перечитаем при баге в правилах. Staging — рабочая зона. Core — только доверенное.</div>
-        <div class="bad">🚩 «Так принято» без объяснения зачем каждый слой.</div>
-      </div>
-      <div class="q-row">
-        <div class="q">«Какой инструмент для DQ-проверок и почему?»</div>
-        <div class="ok">✅ dbt tests — в коде, версионируется. Soda — YAML-декларативно, удобен аналитикам. GE — гибкость Python. OpenMetadata — каталог + UI. Знает 2+ и объясняет когда что.</div>
-        <div class="bad">🚩 Называет один инструмент без trade-off.</div>
-      </div>
-      <div class="q-row">
-        <div class="q">«Что такое Data Contract и зачем он здесь?»</div>
-        <div class="ok">✅ Соглашение между источником (1С:ЗУП) и потребителем (DWH) — схема, типы, допустимые значения, SLA поставки. При нарушении — алерт источнику.</div>
-        <div class="bad">🚩 Путает с API-контрактом или не знает термин.</div>
-      </div>
-      <div class="q-row">
-        <div class="q">«Кто такой Data Steward?»</div>
-        <div class="ok">✅ Бизнес-роль, знает домен, принимает решения о качестве, отвечает за карантин. Не Data Engineer.</div>
-        <div class="bad">🚩 «Это одно и то же что DE» — не разделяет роли.</div>
+    <div class="note"><strong>Что дорисовать:</strong> Soda/dbt/GE между слоями, Data Steward для карантина, OpenMetadata для мониторинга, Data Contract с 1С:ЗУП.</div>
+
+    <div class="iv-only">
+      <div class="iv-panel">
+        <div class="iv-lbl">🔒 Эталон TO-BE</div>
+        <div class="flag-ok">✅ RAW иммутабелен, Staging — прошло DQ1, Core — прошло DQ2 + cross-checks</div>
+        <div class="flag-ok">✅ Write-Audit-Publish — паттерн без подсказки = Senior</div>
+        <div class="flag-ok">✅ DQ Engine: Soda (YAML) + dbt tests (SQL) — знает разницу</div>
+        <div class="flag-ok">✅ OpenMetadata — каталог + UI Scorecard</div>
+        <div class="flag-ok">✅ Data Steward — owner карантина, SLA 4h CRITICAL / 24h WARN</div>
+        <div class="q-row">
+          <div class="q">«Зачем три слоя, а не проверять прямо в DWH?»</div>
+          <div class="ok">✅ RAW = иммутабельность, можно перечитать при баге в правилах. Staging = рабочая зона. Core = доверенное.</div>
+          <div class="bad">🚩 «Так принято» — без обоснования</div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ---- T3 ---- -->
-<div class="card c-green">
-  <div class="task-head">
-    <span class="tn tn-green">T3</span>
-    <span class="task-title">DQ Score — как измерить качество в цифрах?</span>
-    <span class="task-time">⏱ 15 мин</span>
+<!-- TASK 3 -->
+<div class="card c-blue" style="padding:0;border:none;background:transparent">
+  <div class="task-header closed" onclick="toggleTask('t3')">
+    <span class="tn tn-blue">T3</span>
+    <span class="task-title">Data Contract — соглашение с источником</span>
+    <span class="task-time">⏱ 10 мин</span>
+    <span class="task-chevron">▼</span>
   </div>
-  <p>Вы построили систему. Теперь нужно операционно ответить на вопрос: <strong>«Данные сегодня достаточно хороши для Payroll?»</strong></p>
-  <p>Предложите подход: какие параметры качества важнее для HR-домена, как их взвесить и где поставить порог блокировки. Нарисуйте Scorecard в Excalidraw.</p>
+  <div class="task-body" id="t3">
+    <p>Вы выявили, что 30% ошибок приходят из <strong>1С:ЗУП</strong>: дубли, отрицательные оклады, невалидные даты.</p>
+    <p>Расскажите как выстроите <strong>Data Contract</strong> с командой 1С:ЗУП. Что в него включите? Как будете контролировать соблюдение? Что делать при нарушении?</p>
 
-  <div class="iv-only">
-    <div class="iv-panel">
-      <div class="iv-lbl">🔒 Эталон Scorecard</div>
-      <table>
-        <tr><th>Измерение</th><th>Вес</th><th>Почему</th><th>Порог блокировки Payroll</th></tr>
-        <tr><td>Uniqueness</td><td>25%</td><td>Дубли emp_id = двойное начисление</td><td>= 100%</td></tr>
-        <tr><td>Validity</td><td>25%</td><td>salary &lt; 0, неверный формат счёта</td><td>≥ 99%</td></tr>
-        <tr><td>Completeness</td><td>20%</td><td>Пустое ФИО — невозможно идентифицировать</td><td>≥ 98%</td></tr>
-        <tr><td>Consistency</td><td>20%</td><td>Referential integrity — сирота в отчёте регулятора</td><td>≥ 99%</td></tr>
-        <tr><td>Accuracy</td><td>10%</td><td>Будущая дата, несуществующий отдел</td><td>≥ 95%</td></tr>
-      </table>
-      <p style="margin-top:8px"><strong>Формула:</strong> DQ Score = Σ(вес_i × доля_прошедших_i). Gate блокируется если Uniqueness &lt; 100% ИЛИ Validity &lt; 99%.</p>
-      <p><strong>Тренд важнее числа:</strong> Score 98% три дня подряд и падает → алерт, даже если выше порога.</p>
-      <div class="q-row">
-        <div class="q">«Soda или OpenMetadata умеют показывать такой Scorecard?»</div>
-        <div class="ok">✅ Senior знает оба и говорит что — без подсказки.</div>
-        <div class="bad">🚩 Не знает ни одного UI для DQ Scorecard.</div>
+    <div class="iv-only">
+      <div class="iv-panel">
+        <div class="iv-lbl">🔒 Эталон Data Contract</div>
+        <p><strong>Содержание контракта:</strong></p>
+        <ul style="font-size:12px">
+          <li><strong>Схема:</strong> поля, типы, обязательность (emp_id, fio NOT NULL, salary DECIMAL &gt; 0)</li>
+          <li><strong>Формат CDC:</strong> Debezium, JSON с metadata (source_ts, tx_id)</li>
+          <li><strong>SLA поставки:</strong> latency &lt; 5 мин, availability 99.9%</li>
+          <li><strong>Качество на входе:</strong> uniqueness emp_id, validity salary, referential integrity</li>
+          <li><strong>Канал эскалации:</strong> Slack/Teams команда 1С при DQ-нарушении</li>
+        </ul>
+        <p style="font-size:12px"><strong>Контроль:</strong> Soda checks на входе в RAW → алерт в канал 1С при breach → метрика "contract compliance" в дашборде.</p>
+        <div class="q-row">
+          <div class="q">«Как убедить команду 1С подписать контракт?»</div>
+          <div class="ok">✅ Показываем финансовый ущерб от их ошибок (4,2 млн). Делаем контракт совместно, не сверху. Начинаем с 2-3 критичных правил.</div>
+          <div class="bad">🚩 «Начальство прикажет» — административный подход</div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ---- T4 ---- -->
-<div class="card c-purple">
-  <div class="task-head">
-    <span class="tn tn-purple">T4</span>
-    <span class="task-title">Инцидент — как реагирует ваша система?</span>
-    <span class="task-time">⏱ 15 мин</span>
+<!-- TASK 4 -->
+<div class="card c-green" style="padding:0;border:none;background:transparent">
+  <div class="task-header closed" onclick="toggleTask('t4')">
+    <span class="tn tn-green">T4</span>
+    <span class="task-title">Инцидент — процесс исправления</span>
+    <span class="task-time">⏱ 10 мин</span>
+    <span class="task-chevron">▼</span>
   </div>
-  <p>Ваша DQ-система уже работает. Airflow запускает пайплайн. За <strong>40 минут до Payroll</strong> система фиксирует:</p>
+  <div class="task-body" id="t4">
+    <p>Ваша система работает. В <strong>02:00</strong> Payroll начинается, но DQ Score = <strong>94%</strong> (порог 99%).</p>
+    <table style="max-width:400px">
+      <tr><th>Проблема</th><th>Записей</th><th>Severity</th></tr>
+      <tr><td>salary ≤ 0</td><td>12</td><td style="color:#de350b;font-weight:700">CRITICAL</td></tr>
+      <tr><td>Дубли emp_id</td><td>8</td><td style="color:#de350b;font-weight:700">CRITICAL</td></tr>
+      <tr><td>Невалидный email</td><td>23</td><td style="color:#ff8b00;font-weight:700">WARN</td></tr>
+    </table>
+    <p><strong>Чистых записей: 1 957 из 2 000.</strong></p>
 
-  <table>
-    <tr><th>Тип проблемы</th><th>Записей</th><th>Severity</th></tr>
-    <tr><td>salary = 0 или salary &lt; 0</td><td>12</td><td><strong style="color:#de350b">CRITICAL</strong></td></tr>
-    <tr><td>Дубли emp_id</td><td>28</td><td><strong style="color:#de350b">CRITICAL</strong></td></tr>
-    <tr><td>Незаполненный dept_code</td><td>47</td><td><strong style="color:#ff8b00">WARN</strong></td></tr>
-  </table>
-  <p>Чистых записей: <strong>1 913 из 2 000</strong>. До Payroll — 40 минут.</p>
+    <div class="warn"><strong>Вопрос:</strong> Как реагирует ваша система? Как выстроен процесс исправления? Роль ИСА (Incident Service Analyst)? Что делать с 30% системных ошибок, которые повторяются?</div>
 
-  <div class="warn"><strong>Вопрос:</strong> Расскажите что делает ваша система автоматически и что требует ручного решения. Нарисуйте схему эскалации в Excalidraw.</div>
-
-  <div class="iv-only">
-    <div class="iv-panel">
-      <div class="iv-lbl">🔒 Эталон + скрипт</div>
-      <div class="flag-ok">✅ Зрелый ответ: частичный запуск Payroll для 1 913 чистых записей. 40 CRITICAL → Quarantine. 47 WARN → Core с флагом dq_flag='WARN'. Алерты автоматически.</div>
-      <div class="flag-bad">🚩 «Стопим Payroll полностью» — 1 913 человек не получат зарплату. Красный флаг.</div>
-      <p style="margin-top:10px"><strong>Ожидаемый сценарий:</strong></p>
-      <ol>
-        <li>Airflow gate: исключает CRITICAL записи, пропускает 1 913 чистых + 47 WARN с флагом</li>
-        <li>Slack/PagerDuty → Data Engineer → Head of HR → FinDir (в этом порядке)</li>
-        <li>Jira-тикет с RCA — откуда дубли? почему salary отрицательная? кто owner в 1С:ЗУП?</li>
-        <li>Data Contract с 1С:ЗУП — чтобы источник знал требования заранее</li>
-      </ol>
-      <div class="q-row">
-        <div class="q">«Кто принимает решение запускать ли Payroll частично — в 02:00 ночи?»</div>
-        <div class="ok">✅ Решение закодировано в правилах системы заранее, не требует звонка. Senior убирает человека из критического пути.</div>
-        <div class="bad">🚩 «Звоним Head of HR» — система не настроена, каждый инцидент будит людей.</div>
-      </div>
-      <div class="q-row">
-        <div class="q">«Как предотвратить повторение?»</div>
-        <div class="ok">✅ Data Contract с источником + мониторинг тренда Score + retro с командой 1С:ЗУП.</div>
-        <div class="bad">🚩 «Добавим ещё одну проверку» — нет системного мышления о prevention.</div>
+    <div class="iv-only">
+      <div class="iv-panel">
+        <div class="iv-lbl">🔒 Эталон процесса</div>
+        <div class="flag-ok">✅ Автоматический partial run: 1 957 чистых → Payroll. 20 CRITICAL → карантин. 23 WARN → Core с флагом.</div>
+        <div class="flag-ok">✅ Эскалация: Slack → Data Engineer → Data Steward → Head of HR (только при &gt;5% CRITICAL)</div>
+        <p style="margin-top:10px"><strong>Роль ИСА (Incident Service Analyst):</strong></p>
+        <ul style="font-size:12px">
+          <li>Мониторинг алертов, первичная классификация</li>
+          <li>Роутинг: системный баг → Jira в команду источника, data issue → Data Steward</li>
+          <li>Ведение <strong>retry-логики:</strong> 30% системных ошибок = повторяющиеся паттерны → runbook + автоматическое исправление где возможно</li>
+          <li>RCA после инцидента: был ли контракт нарушен? почему не сработал prevention?</li>
+        </ul>
+        <div class="q-row">
+          <div class="q">«Почему не остановить Payroll полностью?»</div>
+          <div class="ok">✅ 1 957 человек получат зарплату вовремя. Остановка = больше ущерб чем 43 ошибки. Экономика риска.</div>
+          <div class="bad">🚩 «Стопим всё, пока не исправим» — не взвешивает trade-off</div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ===== EVALUATION (IV ONLY) ===== -->
-<div class="iv-only">
+<!-- Evaluation (IV only) -->
+<div class="iv-only" style="margin-top:24px">
 <h2>Оценочный лист</h2>
-<table>
+<table style="font-size:12px">
   <tr><th>Компетенция</th><th>0 — нет</th><th>1 — базово</th><th>2 — хорошо</th><th>3 — Senior</th><th>Вес</th></tr>
   <tr>
-    <td><strong>T1: Диагностика</strong></td>
-    <td>&lt;3 проблем</td>
-    <td>3–4, без бизнес-риска</td>
-    <td>5 + риски</td>
-    <td>Все 6 + сам предлагает правила</td>
+    <td><strong>T1: Диагностика</strong><br><span style="font-size:10px;color:#5e6c84">8+ проблем, историчность</span></td>
+    <td>&lt;5 проблем</td><td>5–6, без SCD</td><td>7–8 + SCD ошибка</td><td>Все 10 + сам предлагает правила</td>
     <td>×1</td>
   </tr>
   <tr>
-    <td><strong>T2: Архитектура</strong></td>
-    <td>Без слоёв, без инструментов</td>
-    <td>3 слоя, инструменты не называет</td>
-    <td>Слои + Soda/dbt + карантин</td>
-    <td>+ WAP + OpenMetadata + Data Contract</td>
-    <td>×2</td>
-  </tr>
-  <tr>
-    <td><strong>T3: DQ Score</strong></td>
-    <td>Не может предложить формулу</td>
-    <td>Простой % без весов</td>
-    <td>Взвешенная формула + порог</td>
-    <td>+ тренд + знает Soda/OM UI</td>
-    <td>×1</td>
-  </tr>
-  <tr>
-    <td><strong>T4: Инцидент</strong></td>
-    <td>Стопим Payroll полностью</td>
-    <td>Частичный, нет превенции</td>
-    <td>Частичный + алерты + RCA</td>
-    <td>+ Data Contract + prevention mindset</td>
+    <td><strong>T2: Архитектура</strong><br><span style="font-size:10px;color:#5e6c84">слои, инструменты, OpenMetadata</span></td>
+    <td>Без слоёв</td><td>3 слоя, инструменты не ясны</td><td>Слои + Soda/dbt + карантин</td><td>+ WAP + OpenMetadata + Steward</td>
     <td>×1.5</td>
   </tr>
   <tr>
-    <td><strong>Data Contract / OpenMetadata</strong></td>
-    <td>Не знает термин</td>
-    <td>Слышал, объяснить не может</td>
-    <td>Объясняет концепцию</td>
-    <td>Объясняет + говорит как внедрял</td>
+    <td><strong>T3: Data Contract</strong><br><span style="font-size:10px;color:#5e6c84">содержание, контроль, эскалация</span></td>
+    <td>Не знает термин</td><td>Слышал, не структурировано</td><td>Структура + канал эскалации</td><td>+ метрики + совместная работа с 1С</td>
     <td>×1.5</td>
   </tr>
   <tr>
-    <td><strong>Ownership / процессы</strong></td>
-    <td>Думает только про код</td>
-    <td>Упоминает роли</td>
-    <td>Разграничивает DE / DS / Owner</td>
-    <td>Строит операционный процесс</td>
+    <td><strong>T4: Инцидент</strong><br><span style="font-size:10px;color:#5e6c84">partial run, ИСА, prevention</span></td>
+    <td>Стопим Payroll</td><td>Частичный, нет роли ИСА</td><td>Partial + ИСА роль + RCA</td><td>+ runbook для 30% системных + prevention</td>
     <td>×1</td>
   </tr>
 </table>
-<p style="margin-top:10px;font-size:13px;color:#5e6c84"><strong>Максимум: 3 × (1+2+1+1.5+1.5+1) = 24 балла.</strong> Каждая подсказка от вас — минус 1 уровень в блоке.</p>
+<p style="margin-top:10px;font-size:12px;color:#5e6c84"><strong>Максимум:</strong> 3 × (1 + 1.5 + 1.5 + 1) = 15 баллов.</p>
 
-<h2>Вердикт</h2>
-<div class="verdict-row">
-  <div class="vc g"><div class="vs">Hire</div><div class="vl">18–24 балла</div><div class="vd">Называет инструменты сам. Знает Data Contract и OpenMetadata. Думает о превенции. Write-Audit-Publish — без подсказки.</div></div>
-  <div class="vc y"><div class="vs">Maybe</div><div class="vl">11–17 баллов</div><div class="vd">Архитектуру строит, инструменты знает базово. Data Contract — слышал. T3–T4 с наводящими. Нужен ментор.</div></div>
-  <div class="vc r"><div class="vs">No Hire</div><div class="vl">0–10 баллов</div><div class="vd">Не знает DQ-измерений, рисует абстракции, Data Contract — пустой звук, Payroll блокирует целиком.</div></div>
-</div>
-
-<h2>Дополнительные вопросы (разминка и углубление)</h2>
-<div class="iv-panel">
-  <div class="iv-lbl">Разминка — первые 5 минут</div>
-  <div class="q-row">
-    <div class="q">«Расскажите про последний проект где занимались качеством данных. Какие инструменты?»</div>
-    <div class="ok">✅ Конкретные инструменты (Soda, dbt, GE, OpenMetadata), конкретные проблемы, понимание ownership данных</div>
-    <div class="bad">🚩 «Делал проверки в SQL» — без инструментов, без мониторинга</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:14px 0">
+  <div style="background:#e3fcef;border:2px solid #36b37e;border-radius:6px;padding:12px;text-align:center">
+    <div style="font-size:18px;font-weight:700;color:#006644">Hire</div>
+    <div style="font-size:12px;font-weight:600">12–15 баллов</div>
+    <div style="font-size:11px;color:#5e6c84;margin-top:4px">Data Contract сам. OpenMetadata знает. ИСА роль чёткая. Prevention mindset.</div>
   </div>
-  <div class="q-row">
-    <div class="q">«Чем Soda отличается от Great Expectations? Когда выбрали бы одно vs другое?»</div>
-    <div class="ok">✅ Soda: YAML-декларативный, удобен аналитикам, Soda Cloud. GE: Python-гибкость, сложные кастомные проверки. dbt: встроено в трансформации. Знает все три.</div>
-    <div class="bad">🚩 «Они одинаковые» или знает только один</div>
+  <div style="background:#fffae6;border:2px solid #ffc400;border-radius:6px;padding:12px;text-align:center">
+    <div style="font-size:18px;font-weight:700;color:#7f5f01">Maybe</div>
+    <div style="font-size:12px;font-weight:600">7–11 баллов</div>
+    <div style="font-size:11px;color:#5e6c84;margin-top:4px">Архитектуру строит, Data Contract с наводящими. Нужен ментор.</div>
+  </div>
+  <div style="background:#ffebe6;border:2px solid #de350b;border-radius:6px;padding:12px;text-align:center">
+    <div style="font-size:18px;font-weight:700;color:#bf2600">No Hire</div>
+    <div style="font-size:12px;font-weight:600">0–6 баллов</div>
+    <div style="font-size:11px;color:#5e6c84;margin-top:4px">Не знает SCD, Data Contract пустой звук, Payroll стопит целиком.</div>
   </div>
 </div>
-<div class="iv-panel">
-  <div class="iv-lbl">Ситуационные вопросы</div>
-  <div class="q-row">
-    <div class="q">«Бизнес говорит: DQ Score 97% — всё хорошо. Вы видите что 3% это все записи с нулевой зарплатой. Как?»</div>
-    <div class="ok">✅ Абсолютные цифры врут — смотрю на состав ошибок. Эскалирую: 60 человек получат 0 ₽. Предлагаю разбить Score по критичности полей.</div>
-    <div class="bad">🚩 «97% — норм»</div>
-  </div>
-  <div class="q-row">
-    <div class="q">«С чего начать внедрение DQ в компании где ничего нет — с инструментов или с процессов?»</div>
-    <div class="ok">✅ С процессов и ownership: кто отвечает за данные каждого домена. Потом профилирование. Потом критичные правила. Инструменты — последние.</div>
-    <div class="bad">🚩 «Ставим Great Expectations и настраиваем» — инструментоцентричный подход</div>
-  </div>
 </div>
-</div><!-- end iv-only -->
 
-</div><!-- end page -->
+</div>
 
 <script>
+const IV_PASSWORD = '4472';
+let ivModeUnlocked = false;
+
+function toggleTask(id) {
+  const body = document.getElementById(id);
+  const header = body.previousElementSibling;
+  const isOpen = body.classList.contains('open');
+  
+  if (isOpen) {
+    body.classList.remove('open');
+    header.classList.remove('open');
+    header.classList.add('closed');
+  } else {
+    body.classList.add('open');
+    header.classList.add('open');
+    header.classList.remove('closed');
+  }
+}
+
+function switchMode(mode) {
+  if (mode === 'iv' && !ivModeUnlocked) {
+    document.getElementById('pwModal').classList.add('show');
+    document.getElementById('pwInput').focus();
+    return;
+  }
+  setMode(mode);
+}
+
+function checkPassword() {
+  const input = document.getElementById('pwInput').value;
+  if (input === IV_PASSWORD) {
+    ivModeUnlocked = true;
+    document.getElementById('pwModal').classList.remove('show');
+    document.getElementById('pwError').style.display = 'none';
+    document.getElementById('pwInput').value = '';
+    setMode('iv');
+  } else {
+    document.getElementById('pwError').style.display = 'block';
+  }
+}
+
 function setMode(m) {
   document.body.className = 'mode-' + m;
   document.getElementById('btn-cand').classList.toggle('active', m === 'cand');
   document.getElementById('btn-iv').classList.toggle('active', m === 'iv');
 }
+
+// Password input enter key
+document.getElementById('pwInput').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') checkPassword();
+});
+
+// Close modal on overlay click
+document.getElementById('pwModal').addEventListener('click', function(e) {
+  if (e.target === this) {
+    this.classList.remove('show');
+  }
+});
 
 function copyExcalidrawJSON() {
   const schema = {
@@ -510,88 +538,87 @@ function copyExcalidrawJSON() {
     "version": 2,
     "source": "dq-case",
     "elements": [
-      // ---- SOURCES row ----
-      {"id":"src1","type":"rectangle","x":20,"y":40,"width":120,"height":56,"angle":0,"strokeColor":"#1971c2","backgroundColor":"#e7f5ff","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"","fontSize":14,"fontFamily":1,"textAlign":"center","verticalAlign":"middle","roundness":{"type":3}},
-      {"id":"src1t","type":"text","x":30,"y":52,"width":100,"height":34,"angle":0,"strokeColor":"#1971c2","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"1С:ЗУП\nCDC · 1ч","fontSize":13,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
-      {"id":"src2","type":"rectangle","x":160,"y":40,"width":120,"height":56,"angle":0,"strokeColor":"#1971c2","backgroundColor":"#e7f5ff","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"text":""},
-      {"id":"src2t","type":"text","x":170,"y":52,"width":100,"height":34,"angle":0,"strokeColor":"#1971c2","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"1С:ДО\nCDC · 1 сутки","fontSize":13,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
-      {"id":"src3","type":"rectangle","x":300,"y":40,"width":120,"height":56,"angle":0,"strokeColor":"#1971c2","backgroundColor":"#e7f5ff","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"text":""},
-      {"id":"src3t","type":"text","x":310,"y":52,"width":100,"height":34,"angle":0,"strokeColor":"#1971c2","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"HRM SaaS\nREST API","fontSize":13,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
-      {"id":"src4","type":"rectangle","x":440,"y":40,"width":120,"height":56,"angle":0,"strokeColor":"#1971c2","backgroundColor":"#e7f5ff","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"text":""},
-      {"id":"src4t","type":"text","x":450,"y":52,"width":100,"height":34,"angle":0,"strokeColor":"#1971c2","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"Legacy CSV\nbatch · 1 неделя","fontSize":13,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
-      // arrows src → kafka
-      {"id":"a1","type":"arrow","x":80,"y":96,"width":0,"height":44,"angle":0,"strokeColor":"#868e96","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[0,44]],"lastCommittedPoint":null,"startBinding":{"elementId":"src1","focus":0,"gap":1},"endBinding":{"elementId":"kafka","focus":0,"gap":1}},
-      {"id":"a2","type":"arrow","x":220,"y":96,"width":0,"height":44,"angle":0,"strokeColor":"#868e96","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[0,44]],"lastCommittedPoint":null,"startBinding":{"elementId":"src2","focus":0,"gap":1},"endBinding":{"elementId":"kafka","focus":0,"gap":1}},
-      {"id":"a3","type":"arrow","x":360,"y":96,"width":0,"height":44,"angle":0,"strokeColor":"#868e96","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[0,44]],"lastCommittedPoint":null,"startBinding":{"elementId":"src3","focus":0,"gap":1},"endBinding":{"elementId":"kafka","focus":0,"gap":1}},
-      {"id":"a4","type":"arrow","x":500,"y":96,"width":0,"height":44,"angle":0,"strokeColor":"#868e96","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[0,44]],"lastCommittedPoint":null,"startBinding":{"elementId":"src4","focus":0,"gap":1},"endBinding":{"elementId":"kafka","focus":0,"gap":1}},
-      // ---- KAFKA ----
-      {"id":"kafka","type":"ellipse","x":200,"y":160,"width":180,"height":56,"angle":0,"strokeColor":"#e67700","backgroundColor":"#fff3bf","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100},
-      {"id":"kafkat","type":"text","x":215,"y":176,"width":150,"height":24,"angle":0,"strokeColor":"#e67700","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"⚡ Kafka","fontSize":15,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
-      // kafka → raw
-      {"id":"a5","type":"arrow","x":290,"y":216,"width":0,"height":44,"angle":0,"strokeColor":"#868e96","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[0,44]]},
-      // ---- RAW ----
-      {"id":"raw","type":"rectangle","x":180,"y":280,"width":220,"height":60,"angle":0,"strokeColor":"#495057","backgroundColor":"#f8f9fa","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100},
-      {"id":"rawt","type":"text","x":190,"y":292,"width":200,"height":36,"angle":0,"strokeColor":"#495057","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"📦 RAW Layer\nиммутабельно, всё как пришло","fontSize":12,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
-      // raw → dq1 (placeholder)
-      {"id":"a6","type":"arrow","x":290,"y":340,"width":0,"height":40,"angle":0,"strokeColor":"#868e96","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[0,40]]},
-      // ---- DQ ENGINE 1 placeholder ----
-      {"id":"dq1","type":"rectangle","x":180,"y":400,"width":220,"height":56,"angle":0,"strokeColor":"#9775fa","backgroundColor":"#f3f0ff","fillStyle":"solid","strokeWidth":2,"strokeStyle":"dashed","roughness":0,"opacity":100},
-      {"id":"dq1t","type":"text","x":190,"y":412,"width":200,"height":32,"angle":0,"strokeColor":"#7048e8","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"🔍 DQ Engine — ??? \nдобавь инструмент","fontSize":12,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
-      // dq1 → staging (PASS)
-      {"id":"a7","type":"arrow","x":290,"y":456,"width":0,"height":40,"angle":0,"strokeColor":"#2f9e44","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[0,40]]},
-      {"id":"a7l","type":"text","x":295,"y":468,"width":60,"height":20,"angle":0,"strokeColor":"#2f9e44","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"PASS ✓","fontSize":11,"fontFamily":1,"textAlign":"left","verticalAlign":"middle"},
-      // dq1 → quarantine (CRITICAL)
-      {"id":"a8","type":"arrow","x":400,"y":428,"width":120,"height":0,"angle":0,"strokeColor":"#e03131","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[120,0]]},
-      {"id":"a8l","type":"text","x":415,"y":412,"width":90,"height":20,"angle":0,"strokeColor":"#e03131","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"CRITICAL 🚫","fontSize":11,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
-      // ---- QUARANTINE ----
-      {"id":"qua","type":"rectangle","x":540,"y":400,"width":160,"height":120,"angle":0,"strokeColor":"#e03131","backgroundColor":"#fff5f5","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100},
-      {"id":"quat","type":"text","x":548,"y":416,"width":144,"height":88,"angle":0,"strokeColor":"#c92a2a","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"🚨 Quarantine\ndq_errors table\n\nOwner: ???\nSLA: 4h CRIT","fontSize":12,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
-      // ---- STAGING ----
-      {"id":"stg","type":"rectangle","x":180,"y":516,"width":220,"height":60,"angle":0,"strokeColor":"#2f9e44","backgroundColor":"#ebfbee","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100},
-      {"id":"stgt","type":"text","x":190,"y":528,"width":200,"height":36,"angle":0,"strokeColor":"#2f9e44","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"🔄 Staging\nпрошло DQ, cross-checks","fontSize":12,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
-      // staging → dq2
-      {"id":"a9","type":"arrow","x":290,"y":576,"width":0,"height":40,"angle":0,"strokeColor":"#868e96","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[0,40]]},
-      // ---- DQ ENGINE 2 placeholder ----
-      {"id":"dq2","type":"rectangle","x":180,"y":636,"width":220,"height":56,"angle":0,"strokeColor":"#9775fa","backgroundColor":"#f3f0ff","fillStyle":"solid","strokeWidth":2,"strokeStyle":"dashed","roughness":0,"opacity":100},
-      {"id":"dq2t","type":"text","x":190,"y":648,"width":200,"height":32,"angle":0,"strokeColor":"#7048e8","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"🔍 DQ Engine 2 — ???\ncross-table checks","fontSize":12,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
-      // dq2 → core
-      {"id":"a10","type":"arrow","x":290,"y":692,"width":0,"height":40,"angle":0,"strokeColor":"#2f9e44","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[0,40]]},
-      // ---- CORE ----
-      {"id":"core","type":"rectangle","x":180,"y":752,"width":220,"height":60,"angle":0,"strokeColor":"#1971c2","backgroundColor":"#e7f5ff","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100},
-      {"id":"coret","type":"text","x":190,"y":764,"width":200,"height":36,"angle":0,"strokeColor":"#1971c2","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"✅ Core / DWH\nтолько доверенные данные","fontSize":12,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
-      // core → gate
-      {"id":"a11","type":"arrow","x":290,"y":812,"width":0,"height":44,"angle":0,"strokeColor":"#868e96","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[0,44]]},
-      // ---- AIRFLOW GATE ----
-      {"id":"gate","type":"diamond","x":210,"y":876,"width":160,"height":70,"angle":0,"strokeColor":"#e67700","backgroundColor":"#fff3bf","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100},
-      {"id":"gatet","type":"text","x":215,"y":894,"width":150,"height":34,"angle":0,"strokeColor":"#e67700","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"Airflow\npayroll_gate","fontSize":12,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
-      // gate → payroll (pass)
-      {"id":"a12","type":"arrow","x":290,"y":946,"width":0,"height":44,"angle":0,"strokeColor":"#2f9e44","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[0,44]]},
-      {"id":"a12l","type":"text","x":295,"y":960,"width":80,"height":20,"angle":0,"strokeColor":"#2f9e44","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"Score ≥ 99%","fontSize":11,"fontFamily":1,"textAlign":"left","verticalAlign":"middle"},
-      // gate → alert (fail)
-      {"id":"a13","type":"arrow","x":370,"y":911,"width":120,"height":0,"angle":0,"strokeColor":"#e03131","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[120,0]]},
-      {"id":"a13l","type":"text","x":380,"y":894,"width":110,"height":20,"angle":0,"strokeColor":"#e03131","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"Score < 99% 🔴","fontSize":11,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
-      // ---- ALERT ----
-      {"id":"alert","type":"rectangle","x":510,"y":880,"width":160,"height":60,"angle":0,"strokeColor":"#e03131","backgroundColor":"#fff5f5","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100},
-      {"id":"alertt","type":"text","x":518,"y":896,"width":144,"height":28,"angle":0,"strokeColor":"#c92a2a","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"🔔 Alert\nSlack · PagerDuty","fontSize":12,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
-      // ---- PAYROLL ----
-      {"id":"pay","type":"rectangle","x":180,"y":1010,"width":220,"height":56,"angle":0,"strokeColor":"#2f9e44","backgroundColor":"#ebfbee","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100},
-      {"id":"payt","type":"text","x":190,"y":1022,"width":200,"height":32,"angle":0,"strokeColor":"#2f9e44","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"💰 Payroll · 02:00","fontSize":14,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
-      // core → BI, Compliance
-      {"id":"a14","type":"arrow","x":400,"y":782,"width":120,"height":0,"angle":0,"strokeColor":"#868e96","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[120,0]]},
-      {"id":"bi","type":"rectangle","x":540,"y":752,"width":130,"height":56,"angle":0,"strokeColor":"#6741d9","backgroundColor":"#f3f0ff","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100},
-      {"id":"bit","type":"text","x":548,"y":768,"width":114,"height":24,"angle":0,"strokeColor":"#6741d9","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"📊 HR BI","fontSize":13,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
-      {"id":"a15","type":"arrow","x":400,"y":800,"width":120,"height":40,"angle":0,"strokeColor":"#868e96","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"points":[[0,0],[120,40]]},
-      {"id":"cmp","type":"rectangle","x":540,"y":828,"width":130,"height":56,"angle":0,"strokeColor":"#6741d9","backgroundColor":"#f3f0ff","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100},
-      {"id":"cmpt","type":"text","x":548,"y":844,"width":114,"height":24,"angle":0,"strokeColor":"#6741d9","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"📋 Compliance","fontSize":13,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"},
-      // ---- MONITORING placeholder ----
-      {"id":"mon","type":"rectangle","x":700,"y":600,"width":160,"height":100,"angle":0,"strokeColor":"#1971c2","backgroundColor":"#e7f5ff","fillStyle":"solid","strokeWidth":2,"strokeStyle":"dashed","roughness":0,"opacity":100},
-      {"id":"mont","type":"text","x":708,"y":616,"width":144,"height":68,"angle":0,"strokeColor":"#1971c2","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"text":"📈 Monitoring\nDQ Score UI\n??? инструмент\nScorecard","fontSize":12,"fontFamily":1,"textAlign":"center","verticalAlign":"middle"}
+      // Sources
+      {"id":"s1","type":"rectangle","x":20,"y":30,"width":110,"height":50,"strokeColor":"#1971c2","backgroundColor":"#e7f5ff","fillStyle":"solid","strokeWidth":2,"roughness":0},
+      {"id":"s1t","type":"text","x":30,"y":40,"width":90,"height":30,"text":"1С:ЗУП\\nCDC · 1ч","fontSize":12,"fontFamily":1,"textAlign":"center"},
+      {"id":"s2","type":"rectangle","x":150,"y":30,"width":110,"height":50,"strokeColor":"#1971c2","backgroundColor":"#e7f5ff","fillStyle":"solid","strokeWidth":2,"roughness":0},
+      {"id":"s2t","type":"text","x":160,"y":40,"width":90,"height":30,"text":"1С:ДО\\nCDC · 1сут","fontSize":12,"fontFamily":1,"textAlign":"center"},
+      {"id":"s3","type":"rectangle","x":280,"y":30,"width":110,"height":50,"strokeColor":"#1971c2","backgroundColor":"#e7f5ff","fillStyle":"solid","strokeWidth":2,"roughness":0},
+      {"id":"s3t","type":"text","x":290,"y":40,"width":90,"height":30,"text":"HRM\\nAPI","fontSize":12,"fontFamily":1,"textAlign":"center"},
+      {"id":"s4","type":"rectangle","x":410,"y":30,"width":110,"height":50,"strokeColor":"#1971c2","backgroundColor":"#e7f5ff","fillStyle":"solid","strokeWidth":2,"roughness":0},
+      {"id":"s4t","type":"text","x":420,"y":40,"width":90,"height":30,"text":"Legacy\\nCSV неделя","fontSize":12,"fontFamily":1,"textAlign":"center"},
+      // Arrows to Kafka
+      {"id":"a1","type":"arrow","x":75,"y":80,"points":[[0,0],[0,30]],"strokeColor":"#868e96","strokeWidth":2},
+      {"id":"a2","type":"arrow","x":205,"y":80,"points":[[0,0],[0,30]],"strokeColor":"#868e96","strokeWidth":2},
+      {"id":"a3","type":"arrow","x":335,"y":80,"points":[[0,0],[0,30]],"strokeColor":"#868e96","strokeWidth":2},
+      {"id":"a4","type":"arrow","x":465,"y":80,"points":[[0,0],[0,30]],"strokeColor":"#868e96","strokeWidth":2},
+      // Kafka
+      {"id":"k","type":"ellipse","x":200,"y":120,"width":140,"height":50,"strokeColor":"#f59e0b","backgroundColor":"#fff3bf","fillStyle":"solid","strokeWidth":2,"roughness":0},
+      {"id":"kt","type":"text","x":220,"y":135,"width":100,"height":20,"text":"⚡ Kafka","fontSize":14,"fontFamily":1,"textAlign":"center"},
+      // Kafka -> RAW
+      {"id":"ak","type":"arrow","x":270,"y":170,"points":[[0,0],[0,30]],"strokeColor":"#868e96","strokeWidth":2},
+      // RAW
+      {"id":"raw","type":"rectangle","x":180,"y":210,"width":180,"height":55,"strokeColor":"#495057","backgroundColor":"#f8f9fa","fillStyle":"solid","strokeWidth":2,"roughness":0},
+      {"id":"rawt","type":"text","x":190,"y":220,"width":160,"height":35,"text":"📦 RAW\\nиммутабельно","fontSize":11,"fontFamily":1,"textAlign":"center"},
+      // RAW -> DQ1 (dashed)
+      {"id":"adq1","type":"arrow","x":270,"y":265,"points":[[0,0],[0,25]],"strokeColor":"#9775fa","strokeWidth":2,"strokeStyle":"dashed"},
+      // DQ1 placeholder
+      {"id":"dq1","type":"rectangle","x":160,"y":300,"width":220,"height":50,"strokeColor":"#9775fa","backgroundColor":"#f3f0ff","fillStyle":"solid","strokeWidth":2,"strokeStyle":"dashed","roughness":0},
+      {"id":"dq1t","type":"text","x":170,"y":310,"width":200,"height":30,"text":"🔍 DQ Engine 1 ???\\nдобавь инструмент","fontSize":11,"fontFamily":1,"textAlign":"center","strokeColor":"#7048e8"},
+      // DQ1 -> Staging (green)
+      {"id":"astg","type":"arrow","x":270,"y":350,"points":[[0,0],[0,25]],"strokeColor":"#2f9e44","strokeWidth":2},
+      {"id":"astgt","type":"text","x":275,"y":360,"width":50,"height":15,"text":"PASS ✓","fontSize":10,"strokeColor":"#2f9e44"},
+      // DQ1 -> Quarantine (red)
+      {"id":"aq","type":"arrow","x":380,"y":325,"points":[[0,0],[80,0]],"strokeColor":"#e03131","strokeWidth":2},
+      {"id":"aqt","type":"text","x":390,"y":310,"width":70,"height":15,"text":"CRITICAL 🚫","fontSize":10,"strokeColor":"#e03131"},
+      // Quarantine
+      {"id":"q","type":"rectangle","x":480,"y":290,"width":140,"height":90,"strokeColor":"#e03131","backgroundColor":"#fff5f5","fillStyle":"solid","strokeWidth":2,"roughness":0},
+      {"id":"qt","type":"text","x":490,"y":305,"width":120,"height":"60,"text":"🚨 Quarantine\\ndq_errors\\nOwner: ???\\nSLA: 4h","fontSize":11,"fontFamily":1,"textAlign":"center","strokeColor":"#c92a2a"},
+      // Staging
+      {"id":"stg","type":"rectangle","x":180,"y":390,"width":180,"height":55,"strokeColor":"#2f9e44","backgroundColor":"#ebfbee","fillStyle":"solid","strokeWidth":2,"roughness":0},
+      {"id":"stgt","type":"text","x":190,"y":400,"width":160,"height":35,"text":"🔄 Staging\\nпрошло DQ1","fontSize":11,"fontFamily":1,"textAlign":"center"},
+      // Staging -> DQ2
+      {"id":"adq2","type":"arrow","x":270,"y":445,"points":[[0,0],[0,25]],"strokeColor":"#9775fa","strokeWidth":2,"strokeStyle":"dashed"},
+      // DQ2
+      {"id":"dq2","type":"rectangle","x":160,"y":480,"width":220,"height":50,"strokeColor":"#9775fa","backgroundColor":"#f3f0ff","fillStyle":"solid","strokeWidth":2,"strokeStyle":"dashed","roughness":0},
+      {"id":"dq2t","type":"text","x":170,"y":490,"width":200,"height":30,"text":"🔍 DQ Engine 2 ???\\ncross-table checks","fontSize":11,"fontFamily":1,"textAlign":"center","strokeColor":"#7048e8"},
+      // DQ2 -> Core
+      {"id":"acore","type":"arrow","x":270,"y":530,"points":[[0,0],[0,25]],"strokeColor":"#2f9e44","strokeWidth":2},
+      // Core
+      {"id":"core","type":"rectangle","x":180,"y":570,"width":180,"height":55,"strokeColor":"#1971c2","backgroundColor":"#e7f5ff","fillStyle":"solid","strokeWidth":2,"roughness":0},
+      {"id":"coret","type":"text","x":190,"y":580,"width":160,"height":35,"text":"✅ Core/DWH\\nдоверенные данные","fontSize":11,"fontFamily":1,"textAlign":"center"},
+      // Core -> Gate
+      {"id":"agate","type":"arrow","x":270,"y":625,"points":[[0,0],[0,30]],"strokeColor":"#868e96","strokeWidth":2},
+      // Airflow Gate (diamond)
+      {"id":"gate","type":"diamond","x":210,"y":670,"width":120,"height":60,"strokeColor":"#f59e0b","backgroundColor":"#fff3bf","fillStyle":"solid","strokeWidth":2,"roughness":0},
+      {"id":"gatet","type":"text","x":225,"y":685,"width":90,"height":30,"text":"Airflow\\npayroll_gate","fontSize":11,"fontFamily":1,"textAlign":"center"},
+      // Gate -> Payroll (green)
+      {"id":"apay","type":"arrow","x":270,"y":730,"points":[[0,0],[0,30]],"strokeColor":"#2f9e44","strokeWidth":2},
+      {"id":"apayt","type":"text","x":275,"y":742,"width":70,"height":15,"text":"Score≥99%","fontSize":10,"strokeColor":"#2f9e44"},
+      // Gate -> Alert (red)
+      {"id":"aal","type":"arrow","x":330,"y":700,"points":[[0,0],[90,0]],"strokeColor":"#e03131","strokeWidth":2},
+      {"id":"aalt","type":"text","x":340,"y":"685,"width":80,"height":15,"text":"Score&lt;99% 🔴","fontSize":10,"strokeColor":"#e03131"},
+      // Alert
+      {"id":"al","type":"rectangle","x":440,"y":670,"width":130,"height":55,"strokeColor":"#e03131","backgroundColor":"#fff5f5","fillStyle":"solid","strokeWidth":2,"roughness":0},
+      {"id":"alt","type":"text","x":450,"y":682,"width":110,"height":30,"text":"🔔 Alert\\nSlack/PagerDuty","fontSize":11,"fontFamily":1,"textAlign":"center","strokeColor":"#c92a2a"},
+      // Payroll
+      {"id":"pay","type":"rectangle","x":180,"y":780,"width":180,"height":50,"strokeColor":"#2f9e44","backgroundColor":"#ebfbee","fillStyle":"solid","strokeWidth":2,"roughness":0},
+      {"id":"payt","type":"text","x":195,"y":792,"width":150,"height":26,"text":"💰 Payroll 02:00","fontSize":13,"fontFamily":1,"textAlign":"center"},
+      // Core -> BI/Compliance
+      {"id":"abi","type":"arrow","x":360,"y":597,"points":[[0,0],[70,0]],"strokeColor":"#868e96","strokeWidth":1},
+      {"id":"bi","type":"rectangle","x":450,"y":570,"width":100,"height":50,"strokeColor":"#6741d9","backgroundColor":"#f3f0ff","fillStyle":"solid","strokeWidth":2,"roughness":0},
+      {"id":"bit","type":"text","x":460,"y":582,"width":80,"height":"26,"text":"📊 HR BI","fontSize":12,"fontFamily":1,"textAlign":"center"},
+      {"id":"acmp","type":"arrow","x":360,"y":615,"points":[[0,0],[70,30]],"strokeColor":"#868e96","strokeWidth":1},
+      {"id":"cmp","type":"rectangle","x":450,"y":630,"width":100,"height":50,"strokeColor":"#6741d9","backgroundColor":"#f3f0ff","fillStyle":"solid","strokeWidth":2,"roughness":0},
+      {"id":"cmpt","type":"text","x":460,"y":642,"width":80,"height":"26,"text":"📋 Compliance","fontSize":12,"fontFamily":1,"textAlign":"center"},
+      // OpenMetadata / Monitoring
+      {"id":"om","type":"rectangle","x":600,"y":480,"width":140,"height":80,"strokeColor":"#1971c2","backgroundColor":"#e7f5ff","fillStyle":"solid","strokeWidth":2,"strokeStyle":"dashed","roughness":0},
+      {"id":"omt","type":"text","x":610,"y":495,"width":120,"height":"50,"text":"📈 OpenMetadata\\nDQ Score UI\\nData Catalog\\n??? инструмент","fontSize":11,"fontFamily":1,"textAlign":"center"},
+      // Data Contract box
+      {"id":"dc","type":"rectangle","x":600,"y":210,"width":140,"height":70,"strokeColor":"#1971c2","backgroundColor":"#e7f5ff","fillStyle":"solid","strokeWidth":2,"roughness":0},
+      {"id":"dct","type":"text","x":610,"y":225,"width":120,"height":"40,"text":"📝 Data Contract\\n1С:ЗУП\\nсхема · SLA\\nканал эскалации","fontSize":11,"fontFamily":1,"textAlign":"center"}
     ],
-    "appState": {
-      "viewBackgroundColor": "#ffffff",
-      "gridSize": null,
-      "zoom": {"value": 0.8}
-    }
+    "appState": {"viewBackgroundColor": "#ffffff", "zoom": {"value": 0.85}}
   };
 
   const text = JSON.stringify(schema);
@@ -605,7 +632,6 @@ function copyExcalidrawJSON() {
       btn.style.background = '';
     }, 3000);
   }).catch(() => {
-    // fallback: download as .excalidraw file
     const blob = new Blob([text], {type: 'application/json'});
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
