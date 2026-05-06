@@ -117,12 +117,13 @@ body.mode-cand .iv-only{display:none}
 .tl-b .tt{font-weight:700;font-size:12px;color:#172b4d}
 .tl-b .tl{color:#5e6c84;font-size:10px;margin-top:2px}
 
-/* Tables grid */
-.tables-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:700px){.tables-grid{grid-template-columns:1fr}}
-.table-card{background:#fff;border:1px solid #dfe1e6;border-radius:6px;padding:12px}
-.table-card h4{font-size:13px;font-weight:700;margin-bottom:8px;color:#172b4d}
-.table-card .src-tag{font-size:10px;background:#e7f5ff;color:#1971c2;padding:2px 8px;border-radius:10px;margin-left:8px}
+/* Tables full width */
+.table-card{background:#fff;border:1px solid #dfe1e6;border-radius:8px;padding:16px;margin-bottom:14px}
+.table-card h4{font-size:15px;font-weight:700;margin-bottom:12px;color:#172b4d}
+.table-card .src-tag{font-size:11px;background:#e7f5ff;color:#1971c2;padding:3px 10px;border-radius:10px;margin-left:10px}
+.table-card table{font-size:13px}
+.table-card th{padding:10px 12px;font-size:12px}
+.table-card td{padding:10px 12px}
 </style>
 </head>
 <body class="mode-cand">
@@ -173,28 +174,17 @@ body.mode-cand .iv-only{display:none}
   <strong>Инцидент:</strong> Регулятор прислал замечание — задвоенные выплаты у 17 сотрудников, 4 сотрудника без договоров в отчёте. Потери ~4,2 млн ₽. Нет DQ-проверок, нет мониторинга, нет понимания откуда грязные данные.
 </div>
 
-<h3>Текущая архитектура</h3>
-<div class="diag">
-  <div class="diag-section">
-    <div class="diag-title">Источники</div>
-    <div style="display:flex;gap:6px;flex-wrap:wrap">
-      <div class="db db-src">1С:ЗУП<span class="diag-label">CDC · 1ч</span></div>
-      <div class="db db-src">1С:ДО<span class="diag-label">CDC · 1 сутки</span></div>
-      <div class="db db-src">HRM SaaS<span class="diag-label">API</span></div>
-      <div class="db db-src">Legacy CSV<span class="diag-label">batch · неделя</span></div>
-    </div>
-    <div class="arrow-down">↓ ↓ ↓ ↓</div>
+<h3>Текущая архитектура (AS-IS)</h3>
+<p>4 источника → Kafka → HR DWH (одна таблица, нет проверок) → Payroll/BI/Compliance.</p>
+
+<div class="excali-box" style="background:#252836">
+  <div class="ex-text">
+    <strong>📊 Схема AS-IS в Excalidraw</strong><br>
+    Нажмите — схема скопируется. Вставьте в Excalidraw чтобы смотреть/редактировать.
   </div>
-  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px">
-    <div class="db db-kafka">⚡ Kafka</div>
-    <div class="arrow">→</div>
-    <div class="db db-dwh" style="flex:1;min-width:140px">⚠️ HR DWH<br><span class="diag-label">нет слоёв · нет проверок</span></div>
-    <div style="display:flex;flex-direction:column;gap:4px">
-      <div class="db db-payroll">💰 Payroll<span class="diag-label">02:00</span></div>
-      <div class="db db-consumer">📊 BI / Compliance</div>
-    </div>
-  </div>
+  <button class="open-btn" onclick="copyAsIsJSON()" style="background:#4dabf7">📋 Копировать AS-IS</button>
 </div>
+<div id="asis-copied" style="display:none" class="info" style="margin-top:0">✅ AS-IS схема скопирована! Вставьте в excalidraw.com → Cmd+V</div>
 
 <!-- TASK 1 -->
 <div class="card c-orange" style="padding:0;border:none;background:transparent">
@@ -209,10 +199,9 @@ body.mode-cand .iv-only{display:none}
     <div class="note"><strong>Формат ответа (пример):</strong> «Вижу E003 в employees_zup — дубль emp_id с разными департаментами. Это <strong>Uniqueness</strong>. Риск: двойное начисление зарплаты, замечание от ФНС».</div>
 
     <h3>📋 Таблицы с данными</h3>
-    <div class="tables-grid">
-      <!-- Table 1 -->
-      <div class="table-card">
-        <h4>employees_zup<span class="src-tag">1С:ЗУП</span></h4>
+    <!-- Table 1 -->
+    <div class="table-card">
+      <h4>employees_zup<span class="src-tag">1С:ЗУП</span></h4>
         <table>
           <tr><th>emp_id</th><th>fio</th><th>salary</th><th>dept</th><th>hire_date</th></tr>
           <tr><td>E001</td><td>Иванов А.С.</td><td>95000</td><td>SALES</td><td>2021-03-15</td></tr>
@@ -221,10 +210,10 @@ body.mode-cand .iv-only{display:none}
           <tr><td>E003</td><td>Петров К.Н.</td><td>85000</td><td>HR</td><td>2020-11-30</td></tr>
           <tr><td>E004</td><td>Сидорова М.</td><td>120000</td><td>XYZ99</td><td>2035-01-01</td></tr>
         </table>
-      </div>
-      <!-- Table 2 -->
-      <div class="table-card">
-        <h4>contracts_do<span class="src-tag">1С:ДО</span></h4>
+    </div>
+    <!-- Table 2 -->
+    <div class="table-card">
+      <h4>contracts_do<span class="src-tag">1С:ДО</span></h4>
         <table>
           <tr><th>emp_id</th><th>contract_num</th><th>start_date</th><th>end_date</th><th>type</th></tr>
           <tr><td>E001</td><td>CTR-2021-001</td><td>2021-03-15</td><td>null</td><td>permanent</td></tr>
@@ -233,10 +222,10 @@ body.mode-cand .iv-only{display:none}
           <tr><td>E006</td><td>null</td><td>2019-05-20</td><td>null</td><td>permanent</td></tr>
           <tr><td>E999</td><td>CTR-2023-999</td><td>2023-01-01</td><td>null</td><td>permanent</td></tr>
         </table>
-      </div>
-      <!-- Table 3 -->
-      <div class="table-card">
-        <h4>profiles_hrm<span class="src-tag">HRM SaaS</span></h4>
+    </div>
+    <!-- Table 3 -->
+    <div class="table-card">
+      <h4>profiles_hrm<span class="src-tag">HRM SaaS</span></h4>
         <table>
           <tr><th>emp_id</th><th>email</th><th>phone</th><th>manager_id</th><th>status</th></tr>
           <tr><td>E001</td><td>ivanov@company.ru</td><td>+79991234567</td><td>E100</td><td>active</td></tr>
@@ -245,10 +234,10 @@ body.mode-cand .iv-only{display:none}
           <tr><td>E005</td><td>NOT_AN_EMAIL</td><td>null</td><td>E100</td><td>active</td></tr>
           <tr><td>E007</td><td>novikov@company.ru</td><td>+79991112233</td><td>E007</td><td>active</td></tr>
         </table>
-      </div>
-      <!-- Table 4 -->
-      <div class="table-card">
-        <h4>payroll_legacy<span class="src-tag">Legacy CSV</span></h4>
+    </div>
+    <!-- Table 4 -->
+    <div class="table-card">
+      <h4>payroll_legacy<span class="src-tag">Legacy CSV</span></h4>
         <table>
           <tr><th>emp_id</th><th>bank_account</th><th>last_payroll</th><th>amount</th><th>currency</th></tr>
           <tr><td>E001</td><td>40817810012345678901</td><td>2024-01-15</td><td>95000</td><td>RUB</td></tr>
@@ -257,7 +246,6 @@ body.mode-cand .iv-only{display:none}
           <tr><td>E008</td><td>40817810011122233344</td><td>2023-06-15</td><td>45000</td><td>USD</td></tr>
           <tr><td>E009</td><td>null</td><td>2024-01-15</td><td>78000</td><td>RUB</td></tr>
         </table>
-      </div>
     </div>
 
     <!-- History table -->
@@ -626,6 +614,77 @@ function copyExcalidrawJSON() {
     const a = document.createElement('a');
     a.href = url;
     a.download = 'dq-tobe-schema.excalidraw';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+}
+
+function copyAsIsJSON() {
+  const schema = {
+    "type": "excalidraw",
+    "version": 2,
+    "source": "dq-case-asis",
+    "elements": [
+      // Title
+      {"id":"title","type":"text","x":20,"y":20,"width":400,"height":30,"text":"AS-IS: Текущая архитектура (проблемная)","fontSize":18,"fontFamily":1,"fontWeight":700,"strokeColor":"#172b4d"},
+      // Sources row
+      {"id":"s1","type":"rectangle","x":20,"y":70,"width":130,"height":60,"strokeColor":"#1971c2","backgroundColor":"#e7f5ff","fillStyle":"solid","strokeWidth":2,"roughness":0},
+      {"id":"s1t","type":"text","x":30,"y":82,"width":110,"height":36,"text":"1С:ЗУП\nCDC · 1ч","fontSize":13,"fontFamily":1,"textAlign":"center","strokeColor":"#1971c2"},
+      {"id":"s2","type":"rectangle","x":170,"y":70,"width":130,"height":60,"strokeColor":"#1971c2","backgroundColor":"#e7f5ff","fillStyle":"solid","strokeWidth":2,"roughness":0},
+      {"id":"s2t","type":"text","x":180,"y":82,"width":110,"height":36,"text":"1С:ДО\nCDC · 1сут","fontSize":13,"fontFamily":1,"textAlign":"center","strokeColor":"#1971c2"},
+      {"id":"s3","type":"rectangle","x":320,"y":70,"width":130,"height":60,"strokeColor":"#1971c2","backgroundColor":"#e7f5ff","fillStyle":"solid","strokeWidth":2,"roughness":0},
+      {"id":"s3t","type":"text","x":330,"y":82,"width":110,"height":36,"text":"HRM SaaS\nREST API","fontSize":13,"fontFamily":1,"textAlign":"center","strokeColor":"#1971c2"},
+      {"id":"s4","type":"rectangle","x":470,"y":70,"width":130,"height":60,"strokeColor":"#1971c2","backgroundColor":"#e7f5ff","fillStyle":"solid","strokeWidth":2,"roughness":0},
+      {"id":"s4t","type":"text","x":480,"y":82,"width":110,"height":36,"text":"Legacy CSV\nbatch · 1 нед","fontSize":13,"fontFamily":1,"textAlign":"center","strokeColor":"#1971c2"},
+      // Arrows to Kafka
+      {"id":"a1","type":"arrow","x":85,"y":130,"points":[[0,0],[0,40]],"strokeColor":"#868e96","strokeWidth":2},
+      {"id":"a2","type":"arrow","x":235,"y":130,"points":[[0,0],[0,40]],"strokeColor":"#868e96","strokeWidth":2},
+      {"id":"a3","type":"arrow","x":385,"y":130,"points":[[0,0],[0,40]],"strokeColor":"#868e96","strokeWidth":2},
+      {"id":"a4","type":"arrow","x":535,"y":130,"points":[[0,0],[0,40]],"strokeColor":"#868e96","strokeWidth":2},
+      // Kafka
+      {"id":"k","type":"ellipse","x":250,"y":180,"width":120,"height":50,"strokeColor":"#f59e0b","backgroundColor":"#fff3bf","fillStyle":"solid","strokeWidth":2,"roughness":0},
+      {"id":"kt","type":"text","x":270,"y":195,"width":80,"height":20,"text":"⚡ Kafka","fontSize":15,"fontFamily":1,"textAlign":"center","strokeColor":"#e67700"},
+      // Arrow to DWH
+      {"id":"ak","type":"arrow","x":310,"y":230,"points":[[0,0],[0,40]],"strokeColor":"#868e96","strokeWidth":2},
+      // DWH (problem!)
+      {"id":"dwh","type":"rectangle","x":200,"y":280,"width":220,"height":90,"strokeColor":"#de350b","backgroundColor":"#ffebe6","fillStyle":"solid","strokeWidth":3,"roughness":0},
+      {"id":"dwht","type":"text","x":210,"y":295,"width":200,"height":60,"text":"⚠️ HR DWH\n❌ Нет слоёв\n❌ Нет DQ-проверок\n❌ Всё в одной таблице","fontSize":12,"fontFamily":1,"textAlign":"center","strokeColor":"#bf2600"},
+      // Airflow (just scheduler)
+      {"id":"af","type":"rectangle","x":450,"y":295,"width":140,"height":60,"strokeColor":"#1976d2","backgroundColor":"#e3f2fd","fillStyle":"solid","strokeWidth":2,"roughness":0},
+      {"id":"aft","type":"text","x":460,"y":308,"width":120,"height":34,"text":"Airflow\nтолько DAG","fontSize":12,"fontFamily":1,"textAlign":"center","strokeColor":"#1565c0"},
+      // Arrow DWH -> Consumers
+      {"id":"ad","type":"arrow","x":310,"y":370,"points":[[0,0],[0,50]],"strokeColor":"#868e96","strokeWidth":2},
+      // Payroll
+      {"id":"pay","type":"rectangle","x":220,"y":430,"width":180,"height":60,"strokeColor":"#36b37e","backgroundColor":"#ebfbee","fillStyle":"solid","strokeWidth":2,"roughness":0},
+      {"id":"payt","type":"text","x":235,"y":445,"width":150,"height":30,"text":"💰 Payroll\n02:00 каждую ночь","fontSize":13,"fontFamily":1,"textAlign":"center","strokeColor":"#006644"},
+      // DWH -> BI
+      {"id":"ab","type":"arrow","x":420,"y":325,"points":[[0,0],[80,0]],"strokeColor":"#868e96","strokeWidth":1},
+      {"id":"bi","type":"rectangle","x":520,"y":300,"width":120,"height":50,"strokeColor":"#6554c0","backgroundColor":"#f3f0ff","fillStyle":"solid","strokeWidth":2,"roughness":0},
+      {"id":"bit","type":"text","x":530,"y":313,"width":100,"height":24,"text":"📊 HR BI","fontSize":13,"fontFamily":1,"textAlign":"center","strokeColor":"#403294"},
+      // DWH -> Compliance
+      {"id":"ac","type":"arrow","x":420,"y":345,"points":[[0,0],[80,30]],"strokeColor":"#868e96","strokeWidth":1},
+      {"id":"cmp","type":"rectangle","x":520,"y":360,"width":120,"height":50,"strokeColor":"#6554c0","backgroundColor":"#f3f0ff","fillStyle":"solid","strokeWidth":2,"roughness":0},
+      {"id":"cmpt","type":"text","x":530,"y":373,"width":100,"height":24,"text":"📋 Compliance\nФНС · ПФР","fontSize":12,"fontFamily":1,"textAlign":"center","strokeColor":"#403294"},
+      // Problem annotation
+      {"id":"prob","type":"text","x":20,"y":520,"width":600,"height":60,"text":"Проблемы:\n• Регулятор: задвоенные выплаты (17 сотрудников), 4 без договоров\n• Потери: ~4,2 млн ₽ за полгода\n• Нет понимания откуда пришли грязные данные","fontSize":12,"fontFamily":1,"strokeColor":"#bf2600"}
+    ],
+    "appState": {"viewBackgroundColor": "#ffffff", "zoom": {"value": 0.9}}
+  };
+
+  const text = JSON.stringify(schema);
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('[onclick="copyAsIsJSON()"]');
+    btn.textContent = '✅ Скопировано!';
+    document.getElementById('asis-copied').style.display = 'block';
+    setTimeout(() => {
+      btn.textContent = '📋 Копировать AS-IS';
+    }, 3000);
+  }).catch(() => {
+    const blob = new Blob([text], {type: 'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'dq-asis-schema.excalidraw';
     a.click();
     URL.revokeObjectURL(url);
   });
