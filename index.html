@@ -177,14 +177,34 @@ body.mode-cand .iv-only{display:none}
 <h3>Текущая архитектура (AS-IS)</h3>
 <p>4 источника → Kafka → HR DWH (одна таблица, нет проверок) → Payroll/BI/Compliance.</p>
 
-<div class="excali-box" style="background:#252836">
+<div class="excali-box" style="background:#252836;margin-bottom:8px">
   <div class="ex-text">
     <strong>📊 Схема AS-IS в Excalidraw</strong><br>
-    Нажмите — схема скопируется. Вставьте в Excalidraw чтобы смотреть/редактировать.
+    Нажмите кнопку → перейдите по ссылке → вставьте
   </div>
-  <button class="open-btn" onclick="copyAsIsJSON()" style="background:#4dabf7">📋 Копировать AS-IS</button>
+  <button class="open-btn" onclick="copyAsIsJSON()" style="background:#4dabf7">📋 Копировать схему</button>
 </div>
-<div id="asis-copied" style="display:none" class="info" style="margin-top:0">✅ AS-IS схема скопирована! Вставьте в excalidraw.com → Cmd+V</div>
+
+<!-- Step by step guide -->
+<div style="background:#f8f9fa;border:1px solid #dfe1e6;border-radius:8px;padding:16px;margin-bottom:16px">
+  <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:8px">
+      <div style="width:28px;height:28px;background:#0052cc;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700">1</div>
+      <span style="font-size:13px;color:#172b4d">Нажмите <strong>«Копировать»</strong></span>
+    </div>
+    <div style="font-size:18px;color:#5e6c84">→</div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <div style="width:28px;height:28px;background:#0052cc;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700">2</div>
+      <a href="https://excalidraw.com" target="_blank" style="font-size:13px;color:#0052cc;text-decoration:none;font-weight:600">Откройте excalidraw.com ↗</a>
+    </div>
+    <div style="font-size:18px;color:#5e6c84">→</div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <div style="width:28px;height:28px;background:#0052cc;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700">3</div>
+      <span style="font-size:13px;color:#172b4d">Нажмите <kbd style="background:#fff;border:1px solid #dfe1e6;border-radius:4px;padding:2px 6px;font-family:inherit">Cmd+V</kbd> (Mac) или <kbd style="background:#fff;border:1px solid #dfe1e6;border-radius:4px;padding:2px 6px;font-family:inherit">Ctrl+V</kbd> (Win)</span>
+    </div>
+  </div>
+  <div id="asis-copied" style="display:none;margin-top:10px" class="info">✅ Готово! Схема скопирована в буфер — вставляйте в Excalidraw</div>
+</div>
 
 <!-- TASK 1 -->
 <div class="card c-orange" style="padding:0;border:none;background:transparent">
@@ -311,16 +331,36 @@ body.mode-cand .iv-only{display:none}
       <li>Мониторинг качества</li>
     </ul>
 
-    <div class="excali-box">
+    <div class="excali-box" style="margin-bottom:8px">
       <div class="ex-text">
-        <strong>✏ Готовая схема в Excalidraw</strong><br>
-        Нажмите — скопируется JSON. Откройте excalidraw.com и нажмите <strong>Cmd+V</strong>.
+        <strong>✏ Готовая схема TO-BE в Excalidraw</strong><br>
+        Базовые блоки уже расставлены — дорисуйте инструменты и объясните
       </div>
-      <button class="open-btn" onclick="copyExcalidrawJSON()">📋 Скопировать схему</button>
+      <button class="open-btn" onclick="copyExcalidrawJSON()">📋 Копировать схему</button>
     </div>
-    <div id="excali-copied" style="display:none" class="info">✅ Скопировано! Откройте <a href="https://excalidraw.com" target="_blank">excalidraw.com</a> → Cmd+V.</div>
 
-    <div class="note"><strong>Что дорисовать:</strong> Soda/dbt/GE между слоями, Data Steward для карантина, OpenMetadata для мониторинга, Data Contract с 1С:ЗУП.</div>
+    <!-- Step by step guide -->
+    <div style="background:#1e1e2e;border:1px solid #3d3d5c;border-radius:8px;padding:16px;margin-bottom:12px">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:28px;height:28px;background:#7c6af7;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700">1</div>
+          <span style="font-size:13px;color:#cdd6f4">Нажмите <strong>«Копировать»</strong></span>
+        </div>
+        <div style="font-size:18px;color:#5e6c84">→</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:28px;height:28px;background:#7c6af7;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700">2</div>
+          <a href="https://excalidraw.com" target="_blank" style="font-size:13px;color:#a78bfa;text-decoration:none;font-weight:600">Откройте excalidraw.com ↗</a>
+        </div>
+        <div style="font-size:18px;color:#5e6c84">→</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:28px;height:28px;background:#7c6af7;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700">3</div>
+          <span style="font-size:13px;color:#cdd6f4">Вставьте <kbd style="background:#2d2d44;border:1px solid #3d3d5c;border-radius:4px;padding:2px 6px;font-family:inherit;color:#cdd6f4">Cmd+V</kbd> / <kbd style="background:#2d2d44;border:1px solid #3d3d5c;border-radius:4px;padding:2px 6px;font-family:inherit;color:#cdd6f4">Ctrl+V</kbd></span>
+        </div>
+      </div>
+      <div id="excali-copied" style="display:none;margin-top:10px" class="info">✅ Готово! Схема вставлена — можно рисовать</div>
+    </div>
+
+    <div class="note"><strong>Что дорисовать:</strong> DQ-инструменты между слоями (Soda? dbt? GE?), Airflow gate перед Payroll, кто Owner карантина, мониторинг качества. Объясняйте каждый блок вслух по ходу рисования.</div>
 
     <div class="iv-only">
       <div class="iv-panel">
