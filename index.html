@@ -206,7 +206,7 @@ body.mode-cand .iv-only{display:none}
   </div>
   <div class="task-body" id="t1">
     <p>Ниже — выгрузки из 4 источников + историчная таблица. Найдите минимум <strong>8 проблем</strong> разных типов. Для каждой: какое <strong>DQ-измерение</strong> и какой <strong>бизнес-риск</strong>.</p>
-    <div class="note"><strong>Формат:</strong> устный спич. Не таблица — рассказывайте как на стендапе.</div>
+    <div class="note"><strong>Формат ответа (пример):</strong> «Вижу E003 в employees_zup — дубль emp_id с разными департаментами. Это <strong>Uniqueness</strong>. Риск: двойное начисление зарплаты, замечание от ФНС».</div>
 
     <h3>📋 Таблицы с данными</h3>
     <div class="tables-grid">
@@ -277,24 +277,29 @@ body.mode-cand .iv-only{display:none}
 
     <div class="iv-only">
       <div class="iv-panel">
-        <div class="iv-lbl">🔒 Эталон — 10 проблем (Senior должен найти 8+)</div>
+        <div class="iv-lbl">� Справочник для интервьюера — какие проблемы искать (8+ = хорошо)</div>
+        <p style="font-size:12px;margin-bottom:10px">Фиксируйте какие нашёл кандидат. Не показывайте эту таблицу — это ваша шпаргалка.</p>
         <table style="font-size:11px">
-          <tr><th>Таблица</th><th>Проблема</th><th>Измерение</th><th>Риск</th></tr>
-          <tr><td>employees_zup</td><td>E002: пустое ФИО, salary=0</td><td><span class="dim d-com">Completeness</span></td><td>Невозможно идентифицировать для выплаты</td></tr>
-          <tr><td>employees_zup</td><td>E003: дубль emp_id, разные dept/salary</td><td><span class="dim d-uniq">Uniqueness</span></td><td>Двойное начисление, неконсистентность</td></tr>
+          <tr><th>Где</th><th>Что видим</th><th>DQ-измерение</th><th>Бизнес-риск</th></tr>
+          <tr><td>employees_zup</td><td>E002: ФИО пустое, salary=0</td><td><span class="dim d-com">Completeness</span></td><td>Невозможно идентифицировать, выплата 0 ₽</td></tr>
+          <tr><td>employees_zup</td><td>E003: дубль emp_id, разные dept/salary</td><td><span class="dim d-uniq">Uniqueness</span></td><td>Двойное начисление → замечание ФНС</td></tr>
           <tr><td>employees_zup</td><td>E003: salary=-5000</td><td><span class="dim d-val">Validity</span></td><td>Отрицательная выплата, бухгалтерский сбой</td></tr>
-          <tr><td>employees_zup</td><td>E004: dept=XYZ99 (нет в справочнике)</td><td><span class="dim d-cons">Consistency</span></td><td>Фантомный отдел в отчётах</td></tr>
-          <tr><td>employees_zup</td><td>E004: hire_date=2035 (будущее)</td><td><span class="dim d-acc">Accuracy</span></td><td>Некорректная аналитика по стажу</td></tr>
-          <tr><td>contracts_do</td><td>E002: end_date &lt; today() для fixed</td><td><span class="dim d-time">Timeliness</span></td><td>Просроченный договор, правовой риск</td></tr>
+          <tr><td>employees_zup</td><td>E004: dept=XYZ99 (нет в справочнике)</td><td><span class="dim d-cons">Consistency</span></td><td>Фантомный отдел в BI</td></tr>
+          <tr><td>employees_zup</td><td>E004: hire_date=2035 (будущее)</td><td><span class="dim d-acc">Accuracy</span></td><td>Кривая аналитика стажа</td></tr>
+          <tr><td>contracts_do</td><td>E002: end_date прошёл для fixed</td><td><span class="dim d-time">Timeliness</span></td><td>Просроченный договор, правовой риск</td></tr>
           <tr><td>contracts_do</td><td>E006: нет contract_num</td><td><span class="dim d-com">Completeness</span></td><td>Нет документа для Compliance</td></tr>
-          <tr><td>contracts_do</td><td>E999: нет в employees_zup</td><td><span class="dim d-cons">Consistency</span> (orphan)</td><td>Договор без сотрудника, сирота</td></tr>
+          <tr><td>contracts_do</td><td>E999: нет в employees_zup</td><td><span class="dim d-cons">Consistency</span> (orphan)</td><td>Договор без сотрудника — сирота</td></tr>
           <tr><td>profiles_hrm</td><td>E005: email=NOT_AN_EMAIL</td><td><span class="dim d-val">Validity</span></td><td>Невозможно отправить уведомление</td></tr>
           <tr><td>profiles_hrm</td><td>E007: manager_id=E007 (сам себе)</td><td><span class="dim d-cons">Consistency</span></td><td>Организационная петля</td></tr>
           <tr><td>payroll_legacy</td><td>E002: bank_account 15 цифр (нужно 20)</td><td><span class="dim d-acc">Accuracy</span></td><td>Перевод не пройдёт</td></tr>
           <tr><td>payroll_legacy</td><td>E008: currency=USD (не RUB)</td><td><span class="dim d-cons">Consistency</span></td><td>Валютная ошибка в рублёвом payroll</td></tr>
           <tr><td>payroll_legacy</td><td>E009: bank_account=null</td><td><span class="dim d-com">Completeness</span></td><td>Некуда перевести зарплату</td></tr>
-          <tr><td>employee_history</td><td>E003: две записи с is_current=true</td><td><span class="dim d-uniq">Uniqueness</span> (SCD)</td><td>Некорректная история, неясность при аудите</td></tr>
+          <tr><td>employee_history</td><td>E003: две записи is_current=true</td><td><span class="dim d-uniq">Uniqueness</span> (SCD)</td><td>Некорректная история при аудите</td></tr>
         </table>
+        <div class="q-row" style="margin-top:10px">
+          <div class="q">Если застрял &gt;2 мин: «Посмотрите на E003 в разных таблицах — что замечаете?»</div>
+          <div class="q">Если не видит SCD: «А что с историей E003 — корректно ли она версионируется?»</div>
+        </div>
       </div>
     </div>
   </div>
@@ -423,50 +428,34 @@ body.mode-cand .iv-only{display:none}
   </div>
 </div>
 
-<!-- Evaluation (IV only) -->
+<!-- Interviewer Notes -->
 <div class="iv-only" style="margin-top:24px">
-<h2>Оценочный лист</h2>
-<table style="font-size:12px">
-  <tr><th>Компетенция</th><th>0 — нет</th><th>1 — базово</th><th>2 — хорошо</th><th>3 — Senior</th><th>Вес</th></tr>
-  <tr>
-    <td><strong>T1: Диагностика</strong><br><span style="font-size:10px;color:#5e6c84">8+ проблем, историчность</span></td>
-    <td>&lt;5 проблем</td><td>5–6, без SCD</td><td>7–8 + SCD ошибка</td><td>Все 10 + сам предлагает правила</td>
-    <td>×1</td>
-  </tr>
-  <tr>
-    <td><strong>T2: Архитектура</strong><br><span style="font-size:10px;color:#5e6c84">слои, инструменты, OpenMetadata</span></td>
-    <td>Без слоёв</td><td>3 слоя, инструменты не ясны</td><td>Слои + Soda/dbt + карантин</td><td>+ WAP + OpenMetadata + Steward</td>
-    <td>×1.5</td>
-  </tr>
-  <tr>
-    <td><strong>T3: Data Contract</strong><br><span style="font-size:10px;color:#5e6c84">содержание, контроль, эскалация</span></td>
-    <td>Не знает термин</td><td>Слышал, не структурировано</td><td>Структура + канал эскалации</td><td>+ метрики + совместная работа с 1С</td>
-    <td>×1.5</td>
-  </tr>
-  <tr>
-    <td><strong>T4: Инцидент</strong><br><span style="font-size:10px;color:#5e6c84">partial run, ИСА, prevention</span></td>
-    <td>Стопим Payroll</td><td>Частичный, нет роли ИСА</td><td>Partial + ИСА роль + RCA</td><td>+ runbook для 30% системных + prevention</td>
-    <td>×1</td>
-  </tr>
-</table>
-<p style="margin-top:10px;font-size:12px;color:#5e6c84"><strong>Максимум:</strong> 3 × (1 + 1.5 + 1.5 + 1) = 15 баллов.</p>
-
-<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:14px 0">
-  <div style="background:#e3fcef;border:2px solid #36b37e;border-radius:6px;padding:12px;text-align:center">
-    <div style="font-size:18px;font-weight:700;color:#006644">Hire</div>
-    <div style="font-size:12px;font-weight:600">12–15 баллов</div>
-    <div style="font-size:11px;color:#5e6c84;margin-top:4px">Data Contract сам. OpenMetadata знает. ИСА роль чёткая. Prevention mindset.</div>
+<h2>📝 Поле для заметок интервьюера</h2>
+<div style="background:#fff;border:2px solid #dfe1e6;border-radius:6px;padding:16px">
+  <p style="font-size:12px;color:#5e6c84;margin-bottom:12px">Фиксируйте наблюдения по ходу интервью. Каждая подсказка — отметьте галочкой.</p>
+  
+  <h3 style="font-size:13px;margin:12px 0 6px">T1: Диагностика — что нашёл кандидат</h3>
+  <textarea style="width:100%;height:80px;border:1px solid #dfe1e6;border-radius:4px;padding:8px;font-size:13px;resize:vertical" placeholder="Например: Нашёл 8 проблем — дубли в ЗУПе, отрицательный оклад, SCD с двумя current... Не увидел сироту E999 и циклический manager_id..."></textarea>
+  
+  <h3 style="font-size:13px;margin:12px 0 6px">T2: Архитектура — что спроектировал</h3>
+  <textarea style="width:100%;height:80px;border:1px solid #dfe1e6;border-radius:4px;padding:8px;font-size:13px;resize:vertical" placeholder="Слои RAW→Staging→Core? Инструменты (Soda/dbt/GE)? Data Steward? OpenMetadata? WAP паттерн? Подсказки давал? Сколько?"></textarea>
+  
+  <h3 style="font-size:13px;margin:12px 0 6px">T3: Data Contract — как выстроит</h3>
+  <textarea style="width:100%;height:60px;border:1px solid #dfe1e6;border-radius:4px;padding:8px;font-size:13px;resize:vertical" placeholder="Схема? SLA? Канал эскалации? Как убедил команду 1С? Метрики compliance?"></textarea>
+  
+  <h3 style="font-size:13px;margin:12px 0 6px">T4: Инцидент — процесс и ИСА</h3>
+  <textarea style="width:100%;height:60px;border:1px solid #dfe1e6;border-radius:4px;padding:8px;font-size:13px;resize:vertical" placeholder="Partial run или стоп? Роль ИСА чёткая? Runbook для системных ошибок? Prevention mindset?"></textarea>
+  
+  <div style="margin-top:12px;padding:10px;background:#f8f9fa;border-radius:4px">
+    <strong style="font-size:12px">Подсказки давал:</strong>
+    <label style="font-size:12px;margin-left:12px"><input type="checkbox"> T1</label>
+    <label style="font-size:12px;margin-left:8px"><input type="checkbox"> T2</label>
+    <label style="font-size:12px;margin-left:8px"><input type="checkbox"> T3</label>
+    <label style="font-size:12px;margin-left:8px"><input type="checkbox"> T4</label>
   </div>
-  <div style="background:#fffae6;border:2px solid #ffc400;border-radius:6px;padding:12px;text-align:center">
-    <div style="font-size:18px;font-weight:700;color:#7f5f01">Maybe</div>
-    <div style="font-size:12px;font-weight:600">7–11 баллов</div>
-    <div style="font-size:11px;color:#5e6c84;margin-top:4px">Архитектуру строит, Data Contract с наводящими. Нужен ментор.</div>
-  </div>
-  <div style="background:#ffebe6;border:2px solid #de350b;border-radius:6px;padding:12px;text-align:center">
-    <div style="font-size:18px;font-weight:700;color:#bf2600">No Hire</div>
-    <div style="font-size:12px;font-weight:600">0–6 баллов</div>
-    <div style="font-size:11px;color:#5e6c84;margin-top:4px">Не знает SCD, Data Contract пустой звук, Payroll стопит целиком.</div>
-  </div>
+  
+  <h3 style="font-size:13px;margin:12px 0 6px">Итоговое впечатление</h3>
+  <textarea style="width:100%;height:60px;border:1px solid #dfe1e6;border-radius:4px;padding:8px;font-size:13px;resize:vertical" placeholder="Уровень: Junior / Middle / Senior+ ? Ключевые сильные стороны и gaps..."></textarea>
 </div>
 </div>
 
